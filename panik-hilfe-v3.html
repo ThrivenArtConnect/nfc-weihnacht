@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>🧠 Panik-Hilfe – Sofort-Maßnahmen</title>
+
+  <!-- 👉 dein komplettes <style> bleibt unverändert -->
+  <style>
+    /* … dein CSS aus der Vorlage … */
+  </style>
+</head>
+
+<body>
+  <!-- ===== STICKY HEADER / NOTFALL ===== -->
+  <header class="header" id="header">
+    <h1>🧠 Panik-Hilfe</h1>
+    <p><strong>Du bist nicht allein. Es gibt Hilfe.</strong></p>
+
+    <!-- Emergency: ohne Confirm (im Notfall KEIN Popup) -->
+    <div class="emergency-buttons" aria-label="Notruf-Buttons">
+      <a class="emergency-btn" href="tel:112"><span class="number">112</span>Notfall</a>
+      <a class="emergency-btn" href="tel:110"><span class="number">110</span>Polizei</a>
+      <a class="emergency-btn" href="tel:116123"><span class="number">116 123</span>Seelsorge</a>
+      <a class="emergency-btn" href="tel:116117"><span class="number">116 117</span>Ärztl. Dienst</a>
+    </div>
+
+    <!-- PERSONAL CONTACTS -->
+    <aside class="personal-contacts">
+      <p class="personal-label">👨‍👩‍👧‍👦 DEINE VERTRAUTEN (Schnell anrufen)</p>
+      <div class="personal-buttons">
+        <button class="personal-btn" onclick="callContact('017632375497','Malika')">
+          <span class="name">Malika</span><span class="role">(Tochter)</span>
+        </button>
+        <button class="personal-btn" onclick="callContact('017848024370','Yessin')">
+          <span class="name">Yessin</span><span class="role">(Sohn)</span>
+        </button>
+        <button class="personal-btn" onclick="callContact('015228840400','Karim')">
+          <span class="name">Karim</span><span class="role">(Sohn)</span>
+        </button>
+        <button class="personal-btn" onclick="callContact('017624300762','Sascha')">
+          <span class="name">Sascha</span><span class="role">(Partner)</span>
+        </button>
+      </div>
+    </aside>
+  </header>
+
+  <!-- ===== QUICK NAV ===== -->
+  <nav class="quick-nav" id="quickNav" aria-label="Schnellnavigation">
+    <button class="nav-btn active" data-target="sofort">⚡ Sofort</button>
+    <button class="nav-btn" data-target="atmen">💨 Atmen</button>
+    <button class="nav-btn" data-target="musik">🎵 Musik</button>
+    <button class="nav-btn" data-target="techniken">🧠 Techniken</button>
+    <button class="nav-btn" data-target="langfristig">💚 Langfristig</button>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="content">
+
+    <!-- 1. SOFORT-MASSNAHMEN -->
+    <section class="section-group" id="sofort" aria-labelledby="titel-sofort">
+      <h2 class="section-title" id="titel-sofort">⚡ Sofort-Maßnahmen (2 Minuten)</h2>
+
+      <div class="checklist" role="group" aria-label="Checkliste Sofortmaßnahmen">
+        <!-- jede Maßnahme als <article> -> greifbar im Screenreader -->
+        <article class="checklist-item">
+          <input type="checkbox" id="check1" />
+          <label for="check1"><strong>Sicher sein:</strong> Setzen/hinlegen (kein Sturz)</label>
+        </article>
+        <article class="checklist-item">
+          <input type="checkbox" id="check2" />
+          <label for="check2"><strong>Atmen:</strong> Ein (4 Sek), Aus (6 Sek) oder Box (4-4-4-4)</label>
+        </article>
+        <article class="checklist-item">
+          <input type="checkbox" id="check3" />
+          <label for="check3"><strong>Kontakt:</strong> Jemanden anrufen oder 116 123</label>
+        </article>
+        <article class="checklist-item">
+          <input type="checkbox" id="check4" />
+          <label for="check4"><strong>Grounding:</strong> 5 sehen, 4 anfassen, 3 hören, 2 riechen, 1 schmecken</label>
+        </article>
+        <article class="checklist-item">
+          <input type="checkbox" id="check5" />
+          <label for="check5"><strong>Kaltwasser:</strong> Kurz Gesicht waschen (wenn du sicher stehst/sitzt)</label>
+        </article>
+      </div>
+
+      <p class="alert alert--calm">
+        <strong>⏱️ Wichtig:</strong> Panik geht vorbei. Du bist nicht „kaputt“ – dein Nervensystem ist gerade im Alarm.
+      </p>
+    </section>
+
+    <!-- 2. ATEMTECHNIKEN -->
+    <section class="section-group" id="atmen" aria-labelledby="titel-atmen">
+      <h2 class="section-title" id="titel-atmen">💨 Atemtechniken (Wähle deine Methode)</h2>
+
+      <div class="breathing-selector" role="tablist" aria-label="Atemtechnik Auswahl">
+        <button class="breathing-option active" data-technique="478" role="tab" aria-selected="true">
+          <strong>4-7-8</strong><br><small>Tiefe Entspannung</small>
+        </button>
+        <button class="breathing-option" data-technique="box" role="tab" aria-selected="false">
+          <strong>Box</strong><br><small>Akut &amp; Fokus</small>
+        </button>
+        <button class="breathing-option" data-technique="kohaerence" role="tab" aria-selected="false">
+          <strong>Kohärenz</strong><br><small>5-5 Rhythmus</small>
+        </button>
+      </div>
+
+      <div class="breathing-container">
+        <button class="breathing-circle" id="breathingCircle" title="Tippen: Pause oder Fortsetzen"></button>
+        <p class="breathing-instruction" id="instruction"></p>
+
+        <div class="breathing-controls">
+          <button class="breathing-btn-small" id="pauseBtn">⏸ Pause</button>
+          <button class="breathing-btn-small" id="resetBtn">🔄 Neustarten</button>
+          <button class="breathing-btn-small" id="vibeBtn" aria-pressed="false">📳 Vibration: Aus</button>
+        </div>
+      </div>
+
+      <article class="card card--blue">
+        <h3>📍 Wann welche Technik?</h3>
+        <p><strong>Box:</strong> Akut, schnell, stabilisiert.<br>
+           <strong>4-7-8:</strong> Tiefe Entspannung (mach’s einfach).<br>
+           <strong>Kohärenz:</strong> Sanft, täglich, stabil.</p>
+      </article>
+
+      <article class="card card--blue">
+        <h3>💡 Wichtig (statt Fake-Prozent)</h3>
+        <p>Wenn dir schwindlig wird: kürzer, langsamer oder kurz normal atmen. Hauptsache dranbleiben.</p>
+      </article>
+    </section>
+
+    <!-- 3. MUSIK -->
+    <section class="section-group" id="musik" aria-labelledby="titel-musik">
+      <h2 class="section-title" id="titel-musik">🎵 Entspannungsmusik (YouTube)</h2>
+
+      <div class="music-grid">
+        <!-- Karten bleiben unverändert -->
+        <!-- … -->
+      </div>
+
+      <p class="alert alert--success">
+        <strong>💡 Tipp:</strong> Wenn Netz schlecht ist: lieber eine feste Offline-Playlist vorbereiten.
+      </p>
+    </section>
+
+    <!-- 4. WEITERE TECHNIKEN -->
+    <section class="section-group" id="techniken" aria-labelledby="titel-techniken">
+      <h2 class="section-title" id="titel-techniken">🧠 Weitere Entspannungstechniken</h2>
+
+      <!-- technique-items bleiben -->
+      <!-- … -->
+    </section>
+
+    <!-- 5. LANGFRISTIG -->
+    <section class="section-group" id="langfristig" aria-labelledby="titel-langfristig">
+      <h2 class="section-title" id="titel-langfristig">💚 Langfristige Unterstützung</h2>
+
+      <div class="checklist" role="group" aria-label="Checkliste langfristige Schritte">
+        <!-- checklist-items bleiben -->
+        <!-- … -->
+      </div>
+
+      <p class="alert alert--warning">
+        <strong>Für Angehörige:</strong> Nicht diskutieren. Einfach sagen: „Ich bin da. Atme mit mir.“
+      </p>
+    </section>
+
+    <article class="card card--blue-light" style="margin-top: 28px;">
+      <h3>ℹ️ Wann sollte ich 112 anrufen?</h3>
+      <p><strong>Sofort bei:</strong> Gedanken dich zu verletzen • starke Brustschmerzen + Atemnot • Verwirrtheit/Blackout • medizinischer Notfall.</p>
+      <p style="margin-top:0.5rem"><strong>Auch okay:</strong> wenn du unsicher bist. Lieber einmal zu viel.</p>
+    </article>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p><strong>Für deine Mum</strong> – Mit ❤️ von Karim</p>
+    <p>Diese Seite ersetzt keine professionelle Hilfe. <strong>Notfall: 112 · Seelsorge: 116 123</strong></p>
+    <p style="margin-top:0.5rem;font-size:11px;opacity:0.7;">Stand: Dez 2024</p>
+  </footer>
+
+  <!-- 👉 dein gesamter <script> Block bleibt unverändert -->
+  <script>
+    /* … dein JS aus der Vorlage … */
+  </script>
+</body>
+</html>
