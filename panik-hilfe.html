@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruhig Bleiben | Panik-Sofort-Hilfe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.2);
+            padding: 40px;
+            max-width: 450px;
+            text-align: center;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #999;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .breathing-circle {
+            width: 200px;
+            height: 200px;
+            border: 8px solid #667eea;
+            border-radius: 50%;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            animation: breathe 6s infinite;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        }
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.15);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+        .instruction {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+            color: #333;
+            line-height: 1.6;
+        }
+        .instruction strong {
+            display: block;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        .grounding {
+            background: #fef3c7;
+            border: 2px solid #fbbf24;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .grounding h3 {
+            color: #d97706;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .sense {
+            text-align: left;
+            color: #666;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #e0e7ff;
+            color: #667eea;
+        }
+        .btn-secondary:hover {
+            background: #c7d2fe;
+        }
+        .timer {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e7ff;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #667eea;
+            animation: fillProgress 6s ease-in-out;
+        }
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+        }
+        .emergency {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .emergency h4 {
+            color: #dc2626;
+            margin-bottom: 10px;
+        }
+        .emergency p {
+            color: #991b1b;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .emergency a {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🕊️ Ruhig Bleiben</h1>
+        <p class="subtitle">Dein persönlicher Panik-Helfer von deinem Sohn</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <div class="breathing-circle" id="circle">🕊️</div>
+
+        <div class="instruction">
+            <strong>Atemübung starten:</strong>
+            Atme langsam ein (6 Sekunden) → Halte an (2 Sek) → Aus (6 Sek) → Pausieren (2 Sek)<br>
+            <em>Der Kreis atmet mit dir mit</em>
+        </div>
+
+        <div class="timer" id="timer">Bereit?</div>
+
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="startBreathing()">▶️ Starten</button>
+            <button class="btn btn-secondary" onclick="stopBreathing()">⏸ Stoppen</button>
+        </div>
+
+        <!-- GROUNDING -->
+        <div class="grounding">
+            <h3>🌍 Grounding: 5-4-3-2-1 Technique</h3>
+            <div class="sense">
+                <strong>5 Sachen die du SIEHST</strong><br>
+                Was ist um dich herum? (Farben, Formen)<br><br>
+                <strong>4 Sachen die du BERÜHRST</strong><br>
+                Textur, Temperatur (Kissen, Wand)<br><br>
+                <strong>3 Sachen die du HÖRST</strong><br>
+                Welche Geräusche? (Uhr, Vogel, Wind)<br><br>
+                <strong>2 Sachen die du RIECHST</strong><br>
+                Gutes Aroma (Tee, Kerze)<br><br>
+                <strong>1 Sache die du SCHMECKST</strong><br>
+                Kaugummi, Minze, Tee
+            </div>
+        </div>
+
+        <!-- MUSIK -->
+        <div style="background: #f0fdf4; border-radius: 10px; padding: 15px; margin: 20px 0;">
+            <h3 style="color: #10b981; margin-bottom: 10px;">🎵 Entspannungsmusik starten</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 12px;">
+                Mein persönlicher Chill-Mix speziell für Entspannung
+            </p>
+            <button class="btn btn-primary" style="background: #10b981; width: 100%;" onclick="playMusic()">
+                🎧 Jetzt abspielen
+            </button>
+        </div>
+
+        <!-- NOTFALLINFO -->
+        <div class="emergency">
+            <h4>🆘 Wenn es nicht besser wird:</h4>
+            <p>
+                <strong>Telefonseelsorge:</strong> <a href="tel:+49180111010">0180 / 111 0 110</a> (kostenlos)
+            </p>
+            <p>
+                <strong>Ärztlicher Bereitschaftsdienst:</strong> <a href="tel:116117">116 117</a>
+            </p>
+            <p>
+                <strong>Notfall (Krankenwagen):</strong> <a href="tel:112">112</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                ✓ Du bist nicht allein<br>
+                ✓ Das ist vorübergehend<br>
+                ✓ Du wirst dich besser fühlen
+            </p>
+        </div>
+
+        <p style="margin-top: 20px; font-size: 12px; color: #999;">
+            💚 Mit Liebe von deinem Sohn | Immer für dich da
+        </p>
+    </div>
+
+    <script>
+        let isBreathing = false;
+        let breathingInterval;
+
+        function startBreathing() {
+            if (isBreathing) return;
+            isBreathing = true;
+            
+            let cycle = 0;
+            const timerEl = document.getElementById('timer');
+            
+            breathingInterval = setInterval(() => {
+                cycle = (cycle + 1) % 4;
+                
+                if (cycle === 0) timerEl.textContent = 'Einatmen... (6s)';
+                else if (cycle === 1) timerEl.textContent = 'Halten... (2s)';
+                else if (cycle === 2) timerEl.textContent = 'Ausatmen... (6s)';
+                else timerEl.textContent = 'Ruhe... (2s)';
+            }, 1000);
+
+            // Feedback
+            setTimeout(() => {
+                timerEl.textContent = '✅ Du machst das super!';
+            }, 30000); // Nach 30 Sekunden
+        }
+
+        function stopBreathing() {
+            isBreathing = false;
+            clearInterval(breathingInterval);
+            document.getElementById('timer').textContent = '⏹ Gestoppt';
+        }
+
+        function playMusic() {
+            // Link zu deiner Entspannungs-Playlist (Suno)
+            const spotifyLink = "https://open.spotify.com/playlist/[DEINE-PLAYLIST-ID]";
+            window.open(spotifyLink, '_blank');
+        }
+
+        // Auto-start wenn NFC gescannt wird
+        window.addEventListener('load', () => {
+            console.log('💚 Panik-Helfer geladen - Du schaffst das!');
+        });
+    </script>
+</body>
+</html>
