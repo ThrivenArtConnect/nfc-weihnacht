@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 Schwester's Wunschliste</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .wishlist {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .wish-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wish-text {
+            flex: 1;
+        }
+        .wish-category {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .wish-priority {
+            color: #fbbf24;
+            font-size: 16px;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .edit-info {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎁 MEINE WUNSCHLISTE</h1>
+        <p class="subtitle">Von deinem Bruder SiCKaRiM</p>
+        
+        <div class="edit-info">
+            ✏️ <strong>Du kannst diese Liste editieren!</strong><br>
+            Klick auf "Zur Notion-Seite" → Wünsche hinzufügen
+        </div>
+
+        <div class="wishlist" id="wishlist">
+            <div class="wish-item">
+                <div class="wish-text">
+                    <strong>Placeholder</strong>
+                    <div class="wish-category">Wird geladen...</div>
+                </div>
+                <div class="wish-priority">⏳</div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="openNotion()">📋 Zur Notion-Seite</button>
+        <button class="btn" style="background: #10b981; margin-top: 10px;" onclick="shareList()">
+            📤 Teilen
+        </button>
+    </div>
+
+    <script>
+        // Notion-Link hier einfügen:
+        const NOTION_LINK = "https://notion.so/DEINE-ID-HIER";
+        
+        function openNotion() {
+            window.location.href = NOTION_LINK;
+        }
+
+        function shareList() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Meine Wunschliste',
+                    text: 'Schau meine Wunschliste an!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Link kopiert!');
+                navigator.clipboard.writeText(window.location.href);
+            }
+        }
+
+        // Optional: Notion API laden
+        console.log('🎁 Wunschliste geladen');
+    </script>
+</body>
+</html>
