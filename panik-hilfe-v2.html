@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧠 Panik-Hilfe – Sofort-Maßnahmen</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background: #f8f9fc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding: 0;
+      color: #2d3748;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ===== HEADER / EMERGENCY ===== */
+    .header {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: white;
+      padding: 30px 20px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2);
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .header p {
+      font-size: 14px;
+      opacity: 0.95;
+      margin: 0;
+    }
+
+    /* Emergency Numbers - BIG & EASY */
+    .emergency-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 2px solid rgba(255,255,255,0.3);
+    }
+    .emergency-btn {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid white;
+      color: white;
+      padding: 12px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      text-align: center;
+      transition: all 0.2s;
+      line-height: 1.3;
+    }
+    .emergency-btn:hover {
+      background: white;
+      color: #dc2626;
+      transform: scale(1.05);
+    }
+    .emergency-btn .number {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    /* ===== QUICK NAV TABS ===== */
+    .quick-nav {
+      background: white;
+      padding: 12px 20px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 130px;
+      z-index: 50;
+      margin-bottom: 20px;
+    }
+    .nav-btn {
+      padding: 6px 12px;
+      background: #f0f4f8;
+      border: none;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      color: #555;
+    }
+    .nav-btn:hover {
+      background: #e2e8f0;
+    }
+    .nav-btn.active {
+      background: #3b82f6;
+      color: white;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .content {
+      padding: 0 20px 40px;
+    }
+
+    /* Card Container */
+    .section-group {
+      margin-bottom: 28px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-left: 4px solid;
+      transition: all 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+    }
+    .card--red { border-left-color: #dc2626; }
+    .card--blue { border-left-color: #0ea5e9; }
+    .card--green { border-left-color: #10b981; }
+    .card--yellow { border-left-color: #f59e0b; }
+    .card--purple { border-left-color: #a855f7; }
+
+    .card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1f2937;
+    }
+    .card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 0;
+    }
+
+    /* ===== BREATHING SECTION ===== */
+    .breathing-container {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+      border-radius: 12px;
+      border: 2px solid #0ea5e9;
+    }
+    .breathing-circle {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      text-align: center;
+      animation: breathing 8s infinite;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+    }
+    @keyframes breathing {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+    .breathing-circle:hover {
+      animation: none;
+      transform: scale(1.15);
+    }
+    .breathing-instruction {
+      font-size: 12px;
+      color: #0c4a6e;
+      font-weight: 500;
+    }
+
+    /* ===== CHECKLIST ===== */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .checklist-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      background: #f0fdf4;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .checklist-item:hover {
+      background: #dcfce7;
+    }
+    .checklist-item input {
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      cursor: pointer;
+      accent-color: #10b981;
+      flex-shrink: 0;
+    }
+    .checklist-item label {
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #333;
+      flex: 1;
+    }
+    .checklist-item input:checked + label {
+      color: #10b981;
+      font-weight: 600;
+      text-decoration: line-through;
+    }
+
+    /* ===== MUSIC GRID ===== */
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .music-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid #e2e8f0;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .music-card:hover {
+      border-color: #0ea5e9;
+      box-shadow: 0 6px 14px rgba(14, 165, 233, 0.15);
+    }
+    .music-thumb {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    .music-content {
+      padding: 12px;
+    }
+    .music-content h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0ea5e9;
+      margin-bottom: 4px;
+    }
+    .music-content p {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .music-btn {
+      width: 100%;
+      padding: 8px;
+      background: #0ea5e9;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .music-btn:hover {
+      background: #0284c7;
+    }
+
+    /* ===== TECHNIQUE LIST ===== */
+    .technique-item {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 10px;
+      border-left: 4px solid #10b981;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .technique-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #10b981;
+      margin-bottom: 6px;
+    }
+    .technique-item p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ===== ALERT BOX ===== */
+    .alert {
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 14px 0;
+      border-left: 4px solid;
+    }
+    .alert--info {
+      background: #f0f4f8;
+      border-left-color: #0ea5e9;
+      color: #0c4a6e;
+    }
+    .alert--success {
+      background: #f0fdf4;
+      border-left-color: #10b981;
+      color: #166534;
+    }
+    .alert--warning {
+      background: #fef3c7;
+      border-left-color: #f59e0b;
+      color: #92400e;
+    }
+    .alert--danger {
+      background: #fef2f2;
+      border-left-color: #dc2626;
+      color: #7f1d1d;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: white;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      margin-top: 40px;
+    }
+    .footer p {
+      margin: 4px 0;
+    }
+    .footer a {
+      color: #0ea5e9;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      .header {
+        padding: 20px 16px 16px;
+      }
+      .header h1 {
+        font-size: 24px;
+      }
+      .emergency-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .quick-nav {
+        top: 110px;
+      }
+      .content {
+        padding: 0 16px 30px;
+      }
+      .music-grid {
+        grid-template-columns: 1fr;
+      }
+      .breathing-circle {
+        width: 120px;
+        height: 120px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- STICKY HEADER + EMERGENCY -->
+  <div class="header">
+    <h1>🧠 Panik-Hilfe</h1>
+    <p><strong>Du bist nicht allein. Es gibt Hilfe.</strong></p>
+    
+    <div class="emergency-buttons">
+      <button class="emergency-btn" onclick="call('112')">
+        <span class="number">112</span>
+        Notfall
+      </button>
+      <button class="emergency-btn" onclick="call('110')">
+        <span class="number">110</span>
+        Polizei
+      </button>
+      <button class="emergency-btn" onclick="call('116117')">
+        <span class="number">116 117</span>
+        Arzt
+      </button>
+      <button class="emergency-btn" onclick="call('08001110111')">
+        <span class="number">0800 111 0111</span>
+        Seelsorge
+      </button>
+    </div>
+  </div>
+
+  <!-- QUICK NAV -->
+  <div class="quick-nav">
+    <button class="nav-btn active" onclick="scrollTo('sofort')">⚡ Sofort</button>
+    <button class="nav-btn" onclick="scrollTo('atmen')">💨 Atmen</button>
+    <button class="nav-btn" onclick="scrollTo('musik')">🎵 Musik</button>
+    <button class="nav-btn" onclick="scrollTo('techniken')">🧠 Techniken</button>
+    <button class="nav-btn" onclick="scrollTo('langfristig')">💚 Langfristig</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+
+    <!-- 1. SOFORT-MASSNAHMEN -->
+    <div class="section-group" id="sofort">
+      <div class="section-title">⚡ Sofort-Maßnahmen (2 Minuten)</div>
+      
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="check1">
+          <label for="check1"><strong>Sicher sein:</strong> Setzen/hinlegen (kein Sturz)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check2">
+          <label for="check2"><strong>Atmen:</strong> Ein (4 Sek), Aus (6 Sek)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check3">
+          <label for="check3"><strong>Kontakt:</strong> Jemanden anrufen oder Seelsorge</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check4">
+          <label for="check4"><strong>Grounding:</strong> 5 sehen, 4 anfassen, 3 hören</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check5">
+          <label for="check5"><strong>Kaltwasser:</strong> Gesicht waschen (schnell entspannen)</label>
+        </div>
+      </div>
+
+      <div class="alert alert--info">
+        <strong>⏱️ Wichtig:</strong> Panikattacken dauern 5–20 Min. Du wirst wieder normal atmen. Es ist sicher.
+      </div>
+    </div>
+
+    <!-- 2. ATEMTECHNIKEN -->
+    <div class="section-group" id="atmen">
+      <div class="section-title">💨 Atemtechniken (Wissenschaftlich bewährt)</div>
+      
+      <div class="breathing-container">
+        <div class="breathing-circle" id="breathingCircle" onclick="resetBreathing()">
+          Einatmen<br>(4 Sek)
+        </div>
+        <p class="breathing-instruction">Klick auf Kreis oder folge dem Rhythmus: Einatmen (4) → Halten (7) → Ausatmen (8)</p>
+      </div>
+
+      <div class="card card--blue">
+        <h3>📍 Alternative: Box-Breathing</h3>
+        <p>Ein (4) → Halten (4) → Aus (4) → Halten (4) → Wiederholen. Schneller Effekt.</p>
+      </div>
+
+      <div class="card card--blue">
+        <h3>📍 Längeres Ausatmen</h3>
+        <p><strong>Merksatz:</strong> Langes Ausatmen = Entspannung. Versuche Ausatmen länger zu machen (z.B. 3 ein, 5 aus).</p>
+      </div>
+    </div>
+
+    <!-- 3. MUSIK -->
+    <div class="section-group" id="musik">
+      <div class="section-title">🎵 Entspannungsmusik (YouTube, Kostenlos)</div>
+      
+      <div class="music-grid">
+        <div class="music-card">
+          <div class="music-thumb">🏝️</div>
+          <div class="music-content">
+            <h4>Beruhige deine Gedanken</h4>
+            <p>4+ Stunden Beach-Entspannung</p>
+            <a href="https://www.youtube.com/watch?v=kRakh3ifEMQ" target="_blank" class="music-btn">▶ Öffnen</a>
+          </div>
+        </div>
+
+        <div class="music-card">
+          <div class="music-thumb">💧</div>
+          <div class="music-content">
+            <h4>Wasserfall – 4K</h4>
+            <p>2+ Stunden Naturgeräusche</p>
+            <a href="https://www.youtube.com/watch?v=g_3cIWgZ5C8" target="_blank" class="music-btn">▶ Öffnen</a>
+          </div>
+        </div>
+
+        <div class="music-card">
+          <div class="music-thumb">🌙</div>
+          <div class="music-content">
+            <h4>Meditation zum Einschlafen</h4>
+            <p>1,5+ Stunden Tiefe</p>
+            <a href="https://www.youtube.com/watch?v=f9yLPqHFjSU" target="_blank" class="music-btn">▶ Öffnen</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert--success">
+        <strong>💡 Tipp:</strong> YouTube Videos offline speichern (Premium oder yt-dlp). Lieblings-Playlist erstellen!
+      </div>
+    </div>
+
+    <!-- 4. WEITERE TECHNIKEN -->
+    <div class="section-group" id="techniken">
+      <div class="section-title">🧠 Weitere Entspannungstechniken</div>
+      
+      <div class="technique-item">
+        <h4>🎯 5-4-3-2-1 Grounding (2–3 Min)</h4>
+        <p>Was kannst du sehen? anfassen? hören? riechen? schmecken? → Lenkt Aufmerksamkeit weg von Angst.</p>
+      </div>
+
+      <div class="technique-item">
+        <h4>💪 Progressive Muskelentspannung (10 Min)</h4>
+        <p>Muskeln 5 Sek anspannen → 10 Sek entspannen. Von Füßen bis Kopf. Sagt Körper: „Ich bin sicher."</p>
+      </div>
+
+      <div class="technique-item">
+        <h4>🚶 Bewegung (5–10 Min)</h4>
+        <p>Spaziergang, Dehnen, Treppe. Baut Adrenalin ab und entspannt sofort.</p>
+      </div>
+
+      <div class="technique-item">
+        <h4>❄️ Kalte Dusche / Kalt-Warm</h4>
+        <p>30 Sek kaltes Wasser ins Gesicht: Aktiviert Vagusnerv, beruhigt sofort.</p>
+      </div>
+
+      <div class="technique-item">
+        <h4>🧘 Yoga & Dehnen (YouTube)</h4>
+        <p>Suche „Yoga für Anfänger" oder „Angst Dehnen". 15–20 Min reichen.</p>
+      </div>
+    </div>
+
+    <!-- 5. LANGFRISTIG -->
+    <div class="section-group" id="langfristig">
+      <div class="section-title">💚 Langfristige Unterstützung</div>
+      
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="long1">
+          <label for="long1"><strong>Therapie:</strong> KVT oder Schematherapie (<a href="https://www.psychotherapie-verband.de" target="_blank" style="color: #0ea5e9;">Therapeut:innensuche</a>)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="long2">
+          <label for="long2"><strong>Hausarzt:</strong> Ärztliche Bewertung + ggf. Medikamente</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="long3">
+          <label for="long3"><strong>Apps:</strong> Headspace, 7Mind, Insight Timer (kostenlos/günstig)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="long4">
+          <label for="long4"><strong>Buch:</strong> „Raus aus der Angstfalle" (David D. Clark)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="long5">
+          <label for="long5"><strong>Tagebuch:</strong> Panik-Auslöser notieren → Muster erkennen</label>
+        </div>
+      </div>
+
+      <div class="alert alert--warning">
+        <strong>💬 Für Angehörige:</strong> Nicht sagen „Stell dich nicht so an". Stattdessen: „Ich bin da, du wirst wieder normal atmen." Validierung hilft mehr.
+      </div>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="card card--red" style="margin-top: 28px;">
+      <h3>⚠️ LEBENSBEDROHLICH? 112 anrufen!</h3>
+      <p style="margin-bottom: 8px;"><strong>Sofort:</strong> Gedanken sich zu verletzen • Starke Brustschmerzen + Atemnot • Asthmaanfall • Unkontrolliertes Zittern + Verwirrtheit</p>
+      <p><strong>KEIN Notfall (116 117):</strong> Panikattacken, Angst, Traurigkeit (auch wenn schlecht)</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p><strong>Für deine Mum</strong> – Mit ❤️ von Karim</p>
+    <p>Diese Seite ersetzt keine professionelle Hilfe. <strong>Bei Notfällen: 112 oder Telefonseelsorge 0800 1110111</strong></p>
+    <p style="margin-top: 8px; font-size: 11px; opacity: 0.7;">Dezember 2024 | Quellen: Deutsches Netzwerk für Angststörungen, Bundespsychotherapeutenkammer</p>
+  </div>
+
+  <script>
+    // BREATHING ANIMATION
+    const breathingCircle = document.getElementById('breathingCircle');
+    let phase = 0;
+    let breathingInterval = null;
+    const phases = [
+      { text: 'Einatmen<br>(4 Sek)', duration: 4000 },
+      { text: 'Halten<br>(7 Sek)', duration: 7000 },
+      { text: 'Ausatmen<br>(8 Sek)', duration: 8000 }
+    ];
+
+    function runBreathingCycle() {
+      if (breathingInterval) clearTimeout(breathingInterval);
+      phase = 0;
+      runPhase();
+    }
+
+    function runPhase() {
+      const current = phases[phase];
+      breathingCircle.innerHTML = current.text;
+      breathingInterval = setTimeout(() => {
+        phase++;
+        if (phase < phases.length) runPhase();
+        else runBreathingCycle();
+      }, current.duration);
+    }
+
+    function resetBreathing() {
+      runBreathingCycle();
+    }
+
+    // Auto-start breathing
+    runBreathingCycle();
+
+    // QUICK NAV
+    function scrollTo(id) {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // EMERGENCY BUTTONS
+    function call(number) {
+      // On mobile: tel: protocol
+      // On desktop: just show confirmation
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.location.href = `tel:${number.replace(/\s/g, '')}`;
+      } else {
+        alert(`📞 Anrufen: ${number}`);
+      }
+    }
+
+    // CHECKLIST PERSISTENCE
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      const id = checkbox.id;
+      // Load from storage
+      if (localStorage.getItem(id)) checkbox.checked = true;
+      
+      // Save on change
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          localStorage.setItem(id, 'true');
+        } else {
+          localStorage.removeItem(id);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
