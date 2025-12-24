@@ -1,312 +1,567 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Prompt Gallery | SiCKaRiM Edition</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        :root {
-            --primary: #10b981;
-            --dark: #1f2937;
-            --light: #f9fafb;
-            --border: #e5e7eb;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--light);
-            color: var(--dark);
-        }
-        header {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 10px;
-        }
-        .tab-btn {
-            padding: 10px 20px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            color: var(--dark);
-            font-weight: 500;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-        .tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        .tab-btn:hover {
-            color: var(--primary);
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .prompt-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .prompt-card h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        .prompt-card p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-        .prompt-text {
-            background: #f3f4f6;
-            border-left: 3px solid var(--primary);
-            padding: 12px;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            margin-bottom: 12px;
-            word-break: break-word;
-        }
-        .btn-copy {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: background 0.3s;
-        }
-        .btn-copy:hover {
-            background: #059669;
-        }
-        .btn-copy.copied {
-            background: #6b7280;
-        }
-        .category-header {
-            background: #f0fdf4;
-            border-left: 4px solid var(--primary);
-            padding: 12px;
-            margin: 20px 0 15px 0;
-            border-radius: 5px;
-        }
-        .life-hack {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        .life-hack strong {
-            color: #d97706;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧠 ChatGPT Prompt Gallery – Karim</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: "Segoe UI", -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .header h1 { font-size: 32px; margin-bottom: 5px; }
+    .header p { opacity: 0.9; font-size: 14px; }
+
+    .controls {
+      padding: 20px 30px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      padding: 10px 16px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    .search-box:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+    }
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 8px 14px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      border-color: #667eea;
+      color: #667eea;
+    }
+    .filter-btn.active {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+    }
+
+    .tabs {
+      display: flex;
+      background: white;
+      border-bottom: 2px solid #e0e0e0;
+      padding: 0 30px;
+      gap: 5px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: #667eea; }
+    .tab-btn.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+    }
+
+    .content {
+      padding: 30px;
+      min-height: 400px;
+    }
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .prompt-card {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.3s;
+      cursor: default;
+      display: none;
+    }
+    .prompt-card.visible { display: block; }
+    .prompt-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 8px 20px rgba(102,126,234,0.15);
+    }
+    .prompt-card h3 {
+      color: #667eea;
+      font-size: 16px;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+    .prompt-card .description {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .prompt-card .prompt-text {
+      background: #f5f5f5;
+      border-left: 4px solid #667eea;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      max-height: 150px;
+      overflow-y: auto;
+      color: #333;
+      word-break: break-word;
+    }
+    .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #667eea;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .copy-btn {
+      width: 100%;
+      padding: 10px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .copy-btn:hover {
+      background: #764ba2;
+      transform: translateY(-1px);
+    }
+    .copy-btn.copied {
+      background: #10b981;
+    }
+
+    .info-box {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border-left: 4px solid #f59e0b;
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+    }
+
+    @media (max-width: 768px) {
+      .controls { flex-direction: column; }
+      .search-box { min-width: 100%; }
+      .prompt-grid {
+        grid-template-columns: 1fr;
+      }
+      .header { padding: 20px; }
+      .header h1 { font-size: 24px; }
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>🧠 ChatGPT Prompt Gallery</h1>
-        <p>Von deinem Bruder | Alle GPT Life Hacks in einer App</p>
-    </header>
-
-    <div class="container">
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('basics')">Basics</button>
-            <button class="tab-btn" onclick="switchTab('creative')">Kreativ</button>
-            <button class="tab-btn" onclick="switchTab('productivity')">Produktiv</button>
-            <button class="tab-btn" onclick="switchTab('hacks')">Life Hacks</button>
-            <button class="tab-btn" onclick="switchTab('music')">Musik & Audio</button>
-        </div>
-
-        <div id="basics" class="tab-content active">
-            <div class="category-header">📝 Grundlagen richtig nutzen</div>
-            
-            <div class="prompt-card">
-                <h3>🎯 System Prompt (Rollen-Anweisung)</h3>
-                <p>Sag ChatGPT, wer es sein soll. Damit antwortet es viel besser:</p>
-                <div class="prompt-text">Du bist ein erfahrener Musik-Produzent und Tech-Creator. Gib mir konkrete Tipps in kurzen Sätzen. Keine Füllwörter.</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>💡 Specificity Trick</h3>
-                <p>Je genauer, desto besser. Format angeben:</p>
-                <div class="prompt-text">Gib mir 5 Suno-Prompts für Hard Tekk (165 BPM). Format: [Beschreibung] | [Vibe] | [Thema]</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>🔄 Iterative Verbesserung</h3>
-                <p>Arbeite mit mehreren Prompts zusammen:</p>
-                <div class="prompt-text">"Erste Antwort war gut. Mach es 50% kürzer und nutze nur 2 Bullet Points statt 5."</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-        </div>
-
-        <div id="creative" class="tab-content">
-            <div class="category-header">🎨 Kreative Prompts</div>
-            
-            <div class="prompt-card">
-                <h3>🎵 Suno Music Prompt Builder</h3>
-                <p>Perfekt für deine Musik-Produktion:</p>
-                <div class="prompt-text">Erstelle 3 Suno-Prompts für [GENRE]. Detailliert mit: Artist-Vibe | BPM | Instruments | Feeling</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>🎬 Story & Content Creation</h3>
-                <p>Für Geschichten und Inhalte:</p>
-                <div class="prompt-text">Schreib eine 50-Wort Story über [THEMA]. Tone: [TONE]. Mit Hook am Anfang und Twist am Ende.</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>🖼️ Visual Description for AI Art</h3>
-                <p>Für DALL-E / Midjourney Nutzer:</p>
-                <div class="prompt-text">Beschreib das perfekte Bild für: [THEMA]. Ultra-detailliert: Farben, Lichtsetzung, Stil, Gefühl, Kamera-Winkel.</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-        </div>
-
-        <div id="productivity" class="tab-content">
-            <div class="category-header">⚡ Produktivitäts-Hacks</div>
-            
-            <div class="prompt-card">
-                <h3>📊 Struktur-Generator</h3>
-                <p>Für Projekte & Organisation:</p>
-                <div class="prompt-text">Erstelle eine Projekt-Checklist für [PROJEKT]. Format: Phase | Aufgaben | Zeit | Priorität | Tools</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>📝 Schnelle Zusammenfassungen</h3>
-                <p>Text schnell verstehen:</p>
-                <div class="prompt-text">Zusammenfassung in 3 Sätzen: [TEXT]. Nur die Key Points. Deutsch.</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>🧠 Brainstorm-Booster</h3>
-                <p>Neue Ideen schnell finden:</p>
-                <div class="prompt-text">Gib mir 10 unkonventionelle Ideen für [PROBLEM]. Wild und kreativ. Mit kurzer Erklärung.</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-        </div>
-
-        <div id="hacks" class="tab-content">
-            <div class="life-hack">
-                <strong>💎 TOP HACK #1: Chain-of-Thought Prompting</strong><br>
-                Sag: "Denk schrittweise. Erklär deinen Gedankenprozess." → Bessere Antworten!
-            </div>
-
-            <div class="life-hack">
-                <strong>💎 TOP HACK #2: Few-Shot Learning</strong><br>
-                Gib 1-2 Beispiele von dem, was du willst. ChatGPT imitiert den Style.
-            </div>
-
-            <div class="life-hack">
-                <strong>💎 TOP HACK #3: Constraint Prompting</strong><br>
-                "Antworte in genau 5 Sätzen. Nur Deutsch. Keine Bullet Points."
-            </div>
-
-            <div class="life-hack">
-                <strong>💎 TOP HACK #4: Role-Playing</strong><br>
-                "Du bist ein Mentor. Sag mir, was ich als Anfänger falsch mache."
-            </div>
-
-            <div class="life-hack">
-                <strong>💎 TOP HACK #5: Iterative Refinement Loop</strong><br>
-                Erste Antwort → "Mehr Details" → "Kürzer" → "Andere Perspektive"
-            </div>
-
-            <div class="prompt-card" style="margin-top: 20px;">
-                <h3>🚀 Der Ultimate Meta-Prompt</h3>
-                <p>Nutze das als deine Universalwaffe:</p>
-                <div class="prompt-text">Du bist ein Experte. Ich werde dir [AUFGABE] geben. Antworte kompakt, präzise, direkt. Format: [ERWÜNSCHTES FORMAT]. Keine Füllwörter. Fokus auf [FOKUS]. Tone: [TONE].</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-        </div>
-
-        <div id="music" class="tab-content">
-            <div class="category-header">🎵 Musik & Audio Prompts</div>
-            
-            <div class="prompt-card">
-                <h3>🎹 Suno V5 (ReMi) Prompt Template</h3>
-                <p>Für deine Tekk-Produktion optimiert:</p>
-                <div class="prompt-text">Genre: Hard Tekk | BPM: 165 | Vibe: Dark & Hypnotic | Instruments: Saw Synth, 808 Kick, Reversed Cymbals | Feeling: Intense energy, club-ready | Hook: "Repeat Me"</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>🎧 Lyrics Generator</h3>
-                <p>Schnelle Hook & Lyrics:</p>
-                <div class="prompt-text">Schreib einen 8-Bar Hook für [THEMA]. Deutsch. Rhythmisch, singbar. Theme: [FEELING]. Wiederhole eine Zeile.</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-
-            <div class="prompt-card">
-                <h3>🔊 Production Breakdown</h3>
-                <p>Sound-Design verstehen:</p>
-                <div class="prompt-text">Erkläre die Produktion von [TRACK]. Welche Synths? Welche Effects? Wie wird das Bassline gebaut? Suno-Tipps?</div>
-                <button class="btn-copy" onclick="copyToClipboard(this)">📋 Kopieren</button>
-            </div>
-        </div>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <h1>🧠 ChatGPT Prompt Gallery</h1>
+      <p>Von deinem Bruder Karim – Copy-Paste Prompts für Alltag, Reisen, Creator & mehr</p>
     </div>
 
-    <script>
-        function switchTab(tabName) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(tab => tab.classList.remove('active'));
-            
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
+    <!-- CONTROLS -->
+    <div class="controls">
+      <input 
+        type="text" 
+        class="search-box" 
+        id="searchBox" 
+        placeholder="🔍 Prompt suchen (z.B. 'Reiseplan', 'Packliste')…"
+      />
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="alltag">Alltag</button>
+        <button class="filter-btn" data-filter="reisen">Reisen</button>
+        <button class="filter-btn" data-filter="bilder">Bilder</button>
+        <button class="filter-btn" data-filter="creator">Creator</button>
+        <button class="filter-btn" data-filter="business">Business</button>
+        <button class="filter-btn" data-filter="setup">Setup</button>
+        <button class="filter-btn" data-filter="ki-wissen">KI-Wissen</button>
+      </div>
+    </div>
 
-        function copyToClipboard(element) {
-            const promptText = element.previousElementSibling.innerText;
-            navigator.clipboard.writeText(promptText).then(() => {
-                element.innerText = '✅ Kopiert!';
-                element.classList.add('copied');
-                setTimeout(() => {
-                    element.innerText = '📋 Kopieren';
-                    element.classList.remove('copied');
-                }, 2000);
-            });
-        }
-    </script>
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="alltag">⚡ Alltag</button>
+      <button class="tab-btn" data-tab="reisen">✈️ Reisen</button>
+      <button class="tab-btn" data-tab="bilder">🖼️ Bilder</button>
+      <button class="tab-btn" data-tab="creator">🎛️ Creator</button>
+      <button class="tab-btn" data-tab="business">💼 Business</button>
+      <button class="tab-btn" data-tab="setup">⚙️ Setup</button>
+      <button class="tab-btn" data-tab="ki-wissen">🧠 KI-Wissen</button>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="contentArea">
+      <!-- Wird dynamisch mit JavaScript gefüllt -->
+    </div>
+  </div>
+
+  <script>
+    const prompts = [
+      // ===== ALLTAG =====
+      {
+        id: 1,
+        tab: "alltag",
+        category: "Alltag",
+        title: "Wochenplan Meal Prep",
+        description: "Erstelle einen Wochenplan mit Einkaufsliste",
+        tags: ["alltag", "food"],
+        prompt: "Erstelle mir einen Wochenplan (Mo–So) für Essen. Ziel: [ABNEHMEN/ZUNEHMEN/HEALTHY].\nBudget: [€]. Zeit pro Tag: [Min]. Ich esse gern: [X]. Ich esse nicht: [Y].\nOutput: Tabelle + Einkaufsliste nach Kategorien."
+      },
+      {
+        id: 2,
+        tab: "alltag",
+        category: "Alltag",
+        title: "Putzplan (45 Min)",
+        description: "Strukturierter Putzplan mit Timern",
+        tags: ["alltag", "haushalt"],
+        prompt: "Mach mir einen 45-Minuten Putzplan für heute. Wohnung: [1/2/3 Zimmer], Fokus: [Küche/Bad/alles].\nOutput: 3 Phasen (15/15/15) + Timer-Trigger + Motivation in 1 Satz."
+      },
+      {
+        id: 3,
+        tab: "alltag",
+        category: "Alltag",
+        title: "Entscheidungshilfe",
+        description: "Hilfreiche Struktur für schwierige Wahlen",
+        tags: ["alltag", "entscheidung"],
+        prompt: "Hilf mir eine Entscheidung zu treffen: [Option A] vs [Option B].\nKriterien: [K1,K2,K3]. Gewichtung: [hoch/mittel/low].\nOutput: Pro/Contra + Empfehlung + Risiko + nächster Schritt in 10 Minuten."
+      },
+
+      // ===== REISEN =====
+      {
+        id: 4,
+        tab: "reisen",
+        category: "Reisen",
+        title: "Reiseplan in 60 Sekunden",
+        description: "Kompletter 7-Tage Reiseplan mit Spots",
+        tags: ["reisen", "planung"],
+        prompt: "Plane mir eine Reise nach [ZIEL] für [TAGE]. Zeitraum: [Monat].\nInteressen: [Essen, Kultur, Natur, Nachtleben, Museum, Strand].\nBudget: [€].\nOutput: Tagesplan (Vormittag/Nachmittag/Abend) + 5 Food Spots + 5 Must-Dos + 3 Hidden Gems."
+      },
+      {
+        id: 5,
+        tab: "reisen",
+        category: "Reisen",
+        title: "Packliste (Smart)",
+        description: "Wetter-gerechte Packliste mit Tipps",
+        tags: ["reisen", "packing"],
+        prompt: "Erstelle eine Packliste für [ZIEL] im [Monat] für [TAGE] Tage.\nStyle: [minimal/normal]. Wetter: [kalt/warm/wechselhaft].\nOutput: Kategorien + \"Vergessen Leute oft\" + 5 Reisehacks."
+      },
+      {
+        id: 6,
+        tab: "reisen",
+        category: "Reisen",
+        title: "Transport & Safety Checklist",
+        description: "Sicherheit & Tickets & Transport",
+        tags: ["reisen", "sicherheit"],
+        prompt: "Gib mir eine Checkliste für: SIM/eSIM, ÖPNV, Tickets, typische Scams, Sicherheit in [ZIEL].\nOutput: Bulletpoints + \"Do/Don't\"."
+      },
+
+      // ===== BILDER =====
+      {
+        id: 7,
+        tab: "bilder",
+        category: "Bilder",
+        title: "Bildprompt Generator",
+        description: "5 professionelle Bildprompts mit Stil",
+        tags: ["bilder", "prompting"],
+        prompt: "Erstelle 5 Bildprompts für: [THEMA].\nStil: [realistisch/anime/cyberpunk/editorial/3D].\nDetails: Licht, Farben, Szene, Kamera (Brennweite/Angle), Mood, Materialien.\nOutput: 5 Prompts + 1 Negativliste (was vermeiden)."
+      },
+      {
+        id: 8,
+        tab: "bilder",
+        category: "Bilder",
+        title: "Brand Style Guide",
+        description: "Konsistenter Look für Character/Brand",
+        tags: ["bilder", "branding"],
+        prompt: "Hilf mir einen konsistenten Character/Brand-Style zu definieren:\nLook: [Kleidung, Farben, Haare], Stimmung: [Mood], Setting: [Ort].\nOutput: \"Style Bible\" (10 Regeln) + 3 Prompt-Vorlagen."
+      },
+      {
+        id: 9,
+        tab: "bilder",
+        category: "Bilder",
+        title: "Social Media Visuals",
+        description: "10 schnelle Reel/Post-Ideen",
+        tags: ["bilder", "socialmedia"],
+        prompt: "Gib mir 10 Visual-Ideen für Instagram Reels/Posts zu [Nische].\nOutput: Hook, Bildidee, Textoverlay (max 6 Wörter), CTA."
+      },
+
+      // ===== CREATOR =====
+      {
+        id: 10,
+        tab: "creator",
+        category: "Creator",
+        title: "30-Tage Content Plan",
+        description: "Monatliche Content-Strategie",
+        tags: ["creator", "content"],
+        prompt: "Erstelle einen 30-Tage Content-Plan für [Nische] auf [IG/TikTok/YT].\nZiel: [Growth/Leads/Community].\nOutput: Tabelle mit Datum, Thema, Hook, CTA, Produktionsaufwand (S/M/L)."
+      },
+      {
+        id: 11,
+        tab: "creator",
+        category: "Creator",
+        title: "Video-Skript (30–45 Sek)",
+        description: "Professionelles Reel/Short Script",
+        tags: ["creator", "video"],
+        prompt: "Schreib mir ein 30–45 Sek Skript für ein Reel über [Thema].\nFormat: Hook (0-2s), Value (3 Punkte), CTA.\nSprache: Deutsch, Ton: direkt."
+      },
+      {
+        id: 12,
+        tab: "creator",
+        category: "Creator",
+        title: "Musik/Audio Ideen",
+        description: "Track-Konzepte mit Sound-Elements",
+        tags: ["creator", "musik"],
+        prompt: "Gib mir 10 Ideen für [Genre/Style] Tracks. Tempo: [BPM].\nPro Idee: Titel, Hook-Line, Sound-Elemente, Mood, Referenz-Vibe."
+      },
+
+      // ===== BUSINESS =====
+      {
+        id: 13,
+        tab: "business",
+        category: "Business",
+        title: "Service-Pakete (3-Tier)",
+        description: "Basic/Pro/Premium Paket-Design",
+        tags: ["business", "pricing"],
+        prompt: "Baue mir 3 Service-Pakete (Basic/Pro/Premium) für [Service].\nJe Paket: Leistungsumfang, Ergebnis, Preisrange, Lieferzeit, klare Abgrenzung.\nOutput: Tabelle + Empfehlung, welches Paket am meisten verkauft."
+      },
+      {
+        id: 14,
+        tab: "business",
+        category: "Business",
+        title: "Landingpage (Sales)",
+        description: "Complete Sales Page Copy",
+        tags: ["business", "sales"],
+        prompt: "Schreib eine Landingpage für [Produkt/Service]. Zielgruppe: [Zielgruppe].\nOutput: Headline, Subheadline, 3 Benefits, 3 Features, Social Proof Platzhalter, FAQ, CTA.\nTon: klar, nicht cringe."
+      },
+      {
+        id: 15,
+        tab: "business",
+        category: "Business",
+        title: "Discovery Call Questions",
+        description: "12 strategische Kundenfragen",
+        tags: ["business", "sales"],
+        prompt: "Gib mir 12 Discovery-Fragen für einen Erstcall mit [Zielkunde].\nOutput: gruppiert nach Problem, Ziel, Budget, Timeline, Risiko, Entscheidung."
+      },
+
+      // ===== SETUP =====
+      {
+        id: 16,
+        tab: "setup",
+        category: "Setup",
+        title: "Universal Meta-Prompt",
+        description: "Vorlage für JEDEN besseren Prompt",
+        tags: ["setup", "foundation"],
+        prompt: "Du bist [ROLLE]. Kontext: [KURZ-KONTEXT].\nAufgabe: [AUFGABE].\nOutput-Format: [FORMAT] (z.B. Bulletpoints, Tabelle, Steps).\nConstraints: [LÄNGE], [SPRACHE], [TONE], [NO-GOS].\nStelle 3 Rückfragen, falls Infos fehlen."
+      },
+      {
+        id: 17,
+        tab: "setup",
+        category: "Setup",
+        title: "Qualitäts-Booster",
+        description: "Einfach hinten anhängen",
+        tags: ["setup", "quality"],
+        prompt: "Antworte präzise, ohne Füllwörter. Gib mir zuerst eine kurze Lösung (1–2 Sätze), dann eine Checkliste."
+      },
+      {
+        id: 18,
+        tab: "setup",
+        category: "Setup",
+        title: "Fix: Zu 'Laberig'",
+        description: "Wenn ChatGPT zu ausschweifend ist",
+        tags: ["setup", "fix"],
+        prompt: "Kürzer. Maximal 6 Bulletpoints. Kein Intro. Keine Wiederholungen."
+      },
+      {
+        id: 19,
+        tab: "setup",
+        category: "Setup",
+        title: "Fix: Zu 'Oberflächlich'",
+        description: "Wenn zu wenig Detail/Tiefe",
+        tags: ["setup", "fix"],
+        prompt: "Geh tiefer: Gib mir 3 Optionen (Low/Medium/High effort) + konkrete Beispiele + typische Fehler."
+      },
+
+      // ===== KI-WISSEN =====
+      {
+        id: 20,
+        tab: "ki-wissen",
+        category: "KI-Wissen",
+        title: "Was KI kann/nicht kann",
+        description: "Realistische Erwartungen",
+        tags: ["ki-wissen", "basics"],
+        prompt: "GUT: Texte strukturieren, Ideen, Zusammenfassungen, Varianten, Pläne, Formate.\nSCHWACH: Kann sich irren → Fakten bei wichtigen Themen prüfen, Quellen verlangen.\nDEINE AUFGABE: Nutze KI als Assistent, nicht als Autorität."
+      },
+      {
+        id: 21,
+        tab: "ki-wissen",
+        category: "KI-Wissen",
+        title: "3 goldene Regeln",
+        description: "Für JEDEN besseren Prompt",
+        tags: ["ki-wissen", "framework"],
+        prompt: "1. ROLLE + ZIEL nennen: \"Du bist [Rolle]...\"\n2. OUTPUT-FORMAT vorgeben: Tabelle, Checkliste, Steps\n3. CONSTRAINTS setzen: Länge, Ton, No-Gos, Sprache\nResult: 3x bessere Antworten."
+      },
+      {
+        id: 22,
+        tab: "ki-wissen",
+        category: "KI-Wissen",
+        title: "Privacy & Security",
+        description: "Was NICHT in Prompts gehört",
+        tags: ["ki-wissen", "security"],
+        prompt: "❌ KEINE: Passwörter, Ausweisnummern, Banking-Daten, intime Details\n✅ OKAY: Öffentliche Infos, Beispiele, generische Szenarien\nMerksatz: Wenn du es nicht auf StackOverflow posten würdest, nicht zu ChatGPT."
+      }
+    ];
+
+    let currentTab = "alltag";
+    let currentFilter = "all";
+    let searchTerm = "";
+
+    const contentArea = document.getElementById("contentArea");
+    const searchBox = document.getElementById("searchBox");
+
+    // TAB SWITCHING
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
+        currentTab = e.target.dataset.tab;
+        currentFilter = "all";
+        searchTerm = "";
+        document.getElementById("searchBox").value = "";
+        document.querySelectorAll(".filter-btn").forEach(f => f.classList.remove("active"));
+        document.querySelector('[data-filter="all"]').classList.add("active");
+        render();
+      });
+    });
+
+    // FILTER SWITCHING
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
+        currentFilter = e.target.dataset.filter;
+        render();
+      });
+    });
+
+    // SEARCH
+    searchBox.addEventListener("input", (e) => {
+      searchTerm = e.target.value.toLowerCase();
+      render();
+    });
+
+    // RENDER
+    function render() {
+      let filtered = prompts.filter(p => {
+        const matchTab = p.tab === currentTab;
+        const matchFilter = currentFilter === "all" || p.tags.includes(currentFilter);
+        const matchSearch = searchTerm === "" || 
+                           p.title.toLowerCase().includes(searchTerm) ||
+                           p.description.toLowerCase().includes(searchTerm) ||
+                           p.prompt.toLowerCase().includes(searchTerm);
+        return matchTab && matchFilter && matchSearch;
+      });
+
+      let html = filtered.length === 0 
+        ? '<div class="no-results">❌ Keine Prompts gefunden. Versuch eine andere Suche oder einen anderen Filter.</div>'
+        : '<div class="prompt-grid">' + filtered.map(p => `
+          <div class="prompt-card visible">
+            <h3>${p.title}</h3>
+            <div class="description">${p.description}</div>
+            <div class="tags">
+              ${p.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+            </div>
+            <div class="prompt-text">${p.prompt}</div>
+            <button class="copy-btn" onclick="copyPrompt(this, '${p.prompt.replace(/'/g, "\\'").replace(/"/g, '\\"')}')">📋 Kopieren</button>
+          </div>
+        `).join("") + '</div>';
+
+      contentArea.innerHTML = html;
+    }
+
+    function copyPrompt(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = "✅ Kopiert!";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove("copied");
+        }, 2000);
+      }).catch(err => {
+        alert("Fehler beim Kopieren. Probier's manuell.");
+      });
+    }
+
+    // INITIAL RENDER
+    render();
+  </script>
 </body>
 </html>
