@@ -10,7 +10,7 @@
     html { scroll-behavior: smooth; }
     
     body {
-      background: #f0f4f9;
+      background: #f8f9fc;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
       padding: 0;
@@ -24,14 +24,14 @@
 
     /* ===== HEADER / EMERGENCY ===== */
     .header {
-      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
       color: white;
-      padding: 25px 20px 16px;
+      padding: 30px 20px 20px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2);
     }
     .header h1 {
       font-size: 28px;
@@ -49,12 +49,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 16px;
       padding-top: 12px;
       border-top: 2px solid rgba(255,255,255,0.3);
     }
     .emergency-btn {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.2);
       border: 2px solid white;
       color: white;
       padding: 12px 8px;
@@ -68,7 +68,7 @@
     }
     .emergency-btn:hover {
       background: white;
-      color: #0ea5e9;
+      color: #dc2626;
       transform: scale(1.05);
     }
     .emergency-btn .number {
@@ -80,9 +80,9 @@
 
     /* PERSONAL CONTACTS SECTION */
     .personal-contacts {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.15);
       border-top: 2px solid rgba(255,255,255,0.3);
-      margin-top: 14px;
+      margin-top: 16px;
       padding-top: 12px;
       border-radius: 8px;
     }
@@ -98,7 +98,7 @@
       gap: 8px;
     }
     .personal-btn {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.5);
       color: white;
       padding: 10px 6px;
@@ -111,7 +111,7 @@
       line-height: 1.2;
     }
     .personal-btn:hover {
-      background: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.25);
       border-color: white;
       transform: scale(1.03);
     }
@@ -135,7 +135,7 @@
       overflow-x: auto;
       border-bottom: 1px solid #e2e8f0;
       position: sticky;
-      top: 130px;
+      top: 180px;
       z-index: 50;
       margin-bottom: 20px;
     }
@@ -155,7 +155,7 @@
       background: #e2e8f0;
     }
     .nav-btn.active {
-      background: #0ea5e9;
+      background: #3b82f6;
       color: white;
     }
 
@@ -192,8 +192,8 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       transform: translateY(-2px);
     }
+    .card--red { border-left-color: #dc2626; }
     .card--blue { border-left-color: #0ea5e9; }
-    .card--blue-light { border-left-color: #06b6d4; }
     .card--green { border-left-color: #10b981; }
     .card--yellow { border-left-color: #f59e0b; }
     .card--purple { border-left-color: #a855f7; }
@@ -395,10 +395,10 @@
       border-left-color: #f59e0b;
       color: #92400e;
     }
-    .alert--calm {
-      background: #f0f9ff;
-      border-left-color: #0ea5e9;
-      color: #0c4a6e;
+    .alert--danger {
+      background: #fef2f2;
+      border-left-color: #dc2626;
+      color: #7f1d1d;
     }
 
     /* ===== FOOTER ===== */
@@ -425,7 +425,7 @@
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
       .header {
-        padding: 18px 16px 12px;
+        padding: 20px 16px 16px;
       }
       .header h1 {
         font-size: 24px;
@@ -439,7 +439,7 @@
         gap: 6px;
       }
       .quick-nav {
-        top: 110px;
+        top: 220px;
       }
       .content {
         padding: 0 16px 30px;
@@ -470,6 +470,15 @@
       <button class="emergency-btn" onclick="call('110')">
         <span class="number">110</span>
         Polizei
+      </button>
+      <button class="emergency-btn" onclick="call('116117')">
+        <span class="number">116 117</span>
+        Arzt
+      </button>
+      <button class="emergency-btn" onclick="call('08001110111')">
+        <span class="number">0800 111 0111</span>
+        Seelsorge
+      </button>
     </div>
 
     <!-- PERSONAL CONTACTS -->
@@ -535,7 +544,7 @@
         </div>
       </div>
 
-      <div class="alert alert--calm">
+      <div class="alert alert--info">
         <strong>⏱️ Wichtig:</strong> Panikattacken dauern 5–20 Min. Du wirst wieder normal atmen. Es ist sicher.
       </div>
     </div>
@@ -662,11 +671,11 @@
       </div>
     </div>
 
-    <!-- HELP ZONE (nicht gefährlich - beruhigend) -->
-    <div class="card card--blue-light" style="margin-top: 28px;">
-      <h3>ℹ️ Wann sollte ich 112 anrufen?</h3>
-      <p style="margin-bottom: 8px;"><strong>Sofort bei:</strong> Gedanken sich zu verletzen • Starke Brustschmerzen + Atemnot • Asthmaanfall • Unkontrolliertes Zittern + Verwirrtheit</p>
-      <p><strong>KEIN Notfall:</strong> Panikattacken, Angst, Traurigkeit (auch wenn schlecht) → Seelsorge: 0800 1110111</p>
+    <!-- DANGER ZONE -->
+    <div class="card card--red" style="margin-top: 28px;">
+      <h3>⚠️ LEBENSBEDROHLICH? 112 anrufen!</h3>
+      <p style="margin-bottom: 8px;"><strong>Sofort:</strong> Gedanken sich zu verletzen • Starke Brustschmerzen + Atemnot • Asthmaanfall • Unkontrolliertes Zittern + Verwirrtheit</p>
+      <p><strong>KEIN Notfall (116 117):</strong> Panikattacken, Angst, Traurigkeit (auch wenn schlecht)</p>
     </div>
 
   </div>
