@@ -1,152 +1,199 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎵 Schwester's Wunschliste</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            padding: 40px;
-            max-width: 500px;
-            text-align: center;
-        }
-        h1 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-        .wishlist {
-            background: #f8f9ff;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: left;
-        }
-        .wish-item {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-left: 4px solid #667eea;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .wish-text {
-            flex: 1;
-        }
-        .wish-category {
-            display: inline-block;
-            background: #e0e7ff;
-            color: #667eea;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-        .wish-priority {
-            color: #fbbf24;
-            font-size: 16px;
-        }
-        .btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        .btn:hover {
-            background: #764ba2;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-        .edit-info {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-size: 13px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎵 Schwester's Wunschliste</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.30);
+      padding: 28px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 { color: #667eea; margin-bottom: 8px; font-size: 28px; }
+    .subtitle { color: #666; margin-bottom: 14px; font-size: 14px; }
+
+    .edit-info {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 12px;
+      border-radius: 10px;
+      margin: 14px 0 10px 0;
+      font-size: 13px;
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    .howto {
+      background: #f8f9ff;
+      border: 1px solid #e6e9ff;
+      border-radius: 12px;
+      padding: 14px;
+      margin: 10px 0 16px 0;
+      text-align: left;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.55;
+    }
+    .howto h2 {
+      font-size: 14px;
+      color: #3b5bdb;
+      margin-bottom: 8px;
+    }
+    .howto ul { padding-left: 18px; }
+    .howto li { margin: 6px 0; }
+
+    .wishlist {
+      background: #f8f9ff;
+      border-radius: 15px;
+      padding: 16px;
+      margin: 12px 0;
+      text-align: left;
+    }
+    .wish-item {
+      background: white;
+      padding: 14px;
+      margin: 10px 0;
+      border-left: 4px solid #667eea;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .wish-text { flex: 1; }
+    .wish-category {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #667eea;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-top: 6px;
+      font-weight: 700;
+    }
+    .wish-priority { color: #fbbf24; font-size: 16px; }
+
+    .btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .btn:hover {
+      background: #764ba2;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(102,126,234,0.25);
+    }
+    .btn-green { background: #10b981; }
+    .btn-green:hover { background: #0ea371; }
+
+    .small {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>🎁 MEINE WUNSCHLISTE</h1>
-        <p class="subtitle">Von deinem Bruder SiCKaRiM</p>
-        
-        <div class="edit-info">
-            ✏️ <strong>Du kannst diese Liste editieren!</strong><br>
-            Klick auf "Zur Notion-Seite" → Wünsche hinzufügen
-        </div>
+  <div class="container">
+    <h1>🎁 MEINE WUNSCHLISTE</h1>
+    <p class="subtitle">Von deinem Bruder Karim</p>
 
-        <div class="wishlist" id="wishlist">
-            <div class="wish-item">
-                <div class="wish-text">
-                    <strong>Placeholder</strong>
-                    <div class="wish-category">Wird geladen...</div>
-                </div>
-                <div class="wish-priority">⏳</div>
-            </div>
-        </div>
-
-        <button class="btn" onclick="openNotion()">📋 Zur Notion-Seite</button>
-        <button class="btn" style="background: #10b981; margin-top: 10px;" onclick="shareList()">
-            📤 Teilen
-        </button>
+    <div class="edit-info">
+      ✏️ <strong>Du kannst diese Liste selbst pflegen.</strong><br />
+      Klick auf <em>„Zur Notion‑Seite“</em> → Wünsche hinzufügen/ändern.
     </div>
 
-    <script>
-        // Notion-Link hier einfügen:
-        const NOTION_LINK = "https://notion.so/DEINE-ID-HIER";
-        
-        function openNotion() {
-            window.location.href = NOTION_LINK;
-        }
+    <div class="howto">
+      <h2>✅ Was du hier eintragen kannst</h2>
+      <ul>
+        <li><strong>Wunsch + Link</strong> (Amazon, Etsy, Shop, Screenshot-Link).</li>
+        <li><strong>Kategorie</strong> (z.B. Kleidung, Beauty, Tech, Konzert, Bücher).</li>
+        <li><strong>Priorität</strong> (z.B. 1–5 oder ⭐⭐⭐⭐⭐).</li>
+        <li><strong>Budget</strong> (z.B. „bis 20€“ / „30–50€“).</li>
+        <li><strong>Details</strong>: Größe, Farbe, Marke, Modell, Versand-Deadline.</li>
+        <li><strong>Alternativen</strong>: „Wenn nicht verfügbar, dann …“</li>
+        <li><strong>Überraschung</strong>: „Ich will überrascht werden – Kategorie: …“</li>
+      </ul>
+    </div>
 
-        function shareList() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Meine Wunschliste',
-                    text: 'Schau meine Wunschliste an!',
-                    url: window.location.href
-                });
-            } else {
-                alert('Link kopiert!');
-                navigator.clipboard.writeText(window.location.href);
-            }
-        }
+    <div class="wishlist" id="wishlist">
+      <div class="wish-item">
+        <div class="wish-text">
+          <strong>Beispiel-Wunsch</strong>
+          <div class="wish-category">Kleidung • 20–30€</div>
+        </div>
+        <div class="wish-priority">⭐⭐⭐</div>
+      </div>
 
-        // Optional: Notion API laden
-        console.log('🎁 Wunschliste geladen');
-    </script>
+      <div class="wish-item">
+        <div class="wish-text">
+          <strong>Beispiel: Überraschung</strong>
+          <div class="wish-category">Beauty • „lass dir was einfallen“</div>
+        </div>
+        <div class="wish-priority">⭐⭐⭐⭐</div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="openNotion()">📋 Zur Notion‑Seite</button>
+    <button class="btn btn-green" onclick="shareList()">📤 Teilen</button>
+
+    <div class="small">
+      Tipp: Wenn ein Link mal komisch ist, prüf ob am Ende kein Leerzeichen ist (manchmal sieht man es nicht).
+    </div>
+  </div>
+
+  <script>
+    // Notion-Link hier einfügen:
+    const NOTION_LINK = "https://notion.so/DEINE-ID-HIER";
+
+    function openNotion() {
+      window.location.href = NOTION_LINK;
+    }
+
+    function shareList() {
+      if (navigator.share) {
+        navigator.share({
+          title: "Meine Wunschliste",
+          text: "Schau meine Wunschliste an!",
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link kopiert!");
+      }
+    }
+
+    console.log("🎁 Wunschliste geladen");
+  </script>
 </body>
 </html>
