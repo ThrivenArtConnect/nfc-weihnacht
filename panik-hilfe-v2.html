@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>🧠 Panik-Hilfe – Sofort-Maßnahmen</title>
 
   <style>
@@ -10,7 +13,7 @@
     html { scroll-behavior: smooth; }
     
     body {
-      background: #f8f9fc;
+      background: #f0f4f9;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
       padding: 0;
@@ -24,14 +27,14 @@
 
     /* ===== HEADER / EMERGENCY ===== */
     .header {
-      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
       color: white;
-      padding: 30px 20px 20px;
+      padding: 25px 20px 16px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.2);
+      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
     }
     .header h1 {
       font-size: 28px;
@@ -49,12 +52,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 10px;
-      margin-top: 16px;
+      margin-top: 14px;
       padding-top: 12px;
       border-top: 2px solid rgba(255,255,255,0.3);
     }
     .emergency-btn {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       border: 2px solid white;
       color: white;
       padding: 12px 8px;
@@ -68,7 +71,7 @@
     }
     .emergency-btn:hover {
       background: white;
-      color: #dc2626;
+      color: #0ea5e9;
       transform: scale(1.05);
     }
     .emergency-btn .number {
@@ -80,9 +83,9 @@
 
     /* PERSONAL CONTACTS SECTION */
     .personal-contacts {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.12);
       border-top: 2px solid rgba(255,255,255,0.3);
-      margin-top: 16px;
+      margin-top: 14px;
       padding-top: 12px;
       border-radius: 8px;
     }
@@ -98,7 +101,7 @@
       gap: 8px;
     }
     .personal-btn {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.5);
       color: white;
       padding: 10px 6px;
@@ -111,7 +114,7 @@
       line-height: 1.2;
     }
     .personal-btn:hover {
-      background: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.22);
       border-color: white;
       transform: scale(1.03);
     }
@@ -135,7 +138,7 @@
       overflow-x: auto;
       border-bottom: 1px solid #e2e8f0;
       position: sticky;
-      top: 180px;
+      top: 130px;
       z-index: 50;
       margin-bottom: 20px;
     }
@@ -155,7 +158,7 @@
       background: #e2e8f0;
     }
     .nav-btn.active {
-      background: #3b82f6;
+      background: #0ea5e9;
       color: white;
     }
 
@@ -192,8 +195,8 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       transform: translateY(-2px);
     }
-    .card--red { border-left-color: #dc2626; }
     .card--blue { border-left-color: #0ea5e9; }
+    .card--blue-light { border-left-color: #06b6d4; }
     .card--green { border-left-color: #10b981; }
     .card--yellow { border-left-color: #f59e0b; }
     .card--purple { border-left-color: #a855f7; }
@@ -248,6 +251,77 @@
       font-size: 12px;
       color: #0c4a6e;
       font-weight: 500;
+    }
+
+    /* BREATHING SELECTOR */
+    .breathing-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .breathing-option {
+      padding: 12px 10px;
+      background: #f0f4f8;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 12px;
+      text-align: center;
+      transition: all 0.2s;
+      color: #555;
+    }
+    .breathing-option:hover {
+      background: #e2e8f0;
+      border-color: #0ea5e9;
+    }
+    .breathing-option.active {
+      background: #0ea5e9;
+      color: white;
+      border-color: #0284c7;
+    }
+
+    /* BREATHING CONTROLS */
+    .breathing-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .breathing-btn-small {
+      padding: 8px 14px;
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid #0ea5e9;
+      color: #0ea5e9;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .breathing-btn-small:hover {
+      background: #0ea5e9;
+      color: white;
+    }
+
+      font-size: 12px;
+      opacity: 0.9;
+      display: block;
+    }
+
+    @keyframes breathing-inhale {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.25); }
+    }
+
+    @keyframes breathing-exhale {
+      0% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    .breathing-circle {
+      transition: all 0.3s ease-in-out;
     }
 
     /* ===== CHECKLIST ===== */
@@ -395,10 +469,10 @@
       border-left-color: #f59e0b;
       color: #92400e;
     }
-    .alert--danger {
-      background: #fef2f2;
-      border-left-color: #dc2626;
-      color: #7f1d1d;
+    .alert--calm {
+      background: #f0f9ff;
+      border-left-color: #0ea5e9;
+      color: #0c4a6e;
     }
 
     /* ===== FOOTER ===== */
@@ -425,7 +499,7 @@
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
       .header {
-        padding: 20px 16px 16px;
+        padding: 18px 16px 12px;
       }
       .header h1 {
         font-size: 24px;
@@ -439,7 +513,7 @@
         gap: 6px;
       }
       .quick-nav {
-        top: 220px;
+        top: 110px;
       }
       .content {
         padding: 0 16px 30px;
@@ -535,30 +609,53 @@
         </div>
       </div>
 
-      <div class="alert alert--info">
+      <div class="alert alert--calm">
         <strong>⏱️ Wichtig:</strong> Panikattacken dauern 5–20 Min. Du wirst wieder normal atmen. Es ist sicher.
       </div>
     </div>
 
-    <!-- 2. ATEMTECHNIKEN -->
+    <!-- 2. ATEMTECHNIKEN - PERFEKTIONIERT -->
     <div class="section-group" id="atmen">
-      <div class="section-title">💨 Atemtechniken (Wissenschaftlich bewährt)</div>
+      <div class="section-title">💨 Atemtechniken (Wähle deine Methode)</div>
       
+      <!-- TECHNIQUE SELECTOR -->
+      <div class="breathing-selector">
+        <button class="breathing-option active" data-technique="478" onclick="switchTechnique('478')">
+          <strong>4-7-8</strong><br><small>Tiefe Entspannung</small>
+        </button>
+        <button class="breathing-option" data-technique="box" onclick="switchTechnique('box')">
+          <strong>Box</strong><br><small>Schnell & Effektiv</small>
+        </button>
+        <button class="breathing-option" data-technique="kohaerence" onclick="switchTechnique('kohaerence')">
+          <strong>Kohärenz</strong><br><small>5-5 Rhythmus</small>
+        </button>
+      </div>
+
+      <!-- BREATHING CONTAINER -->
       <div class="breathing-container">
-        <div class="breathing-circle" id="breathingCircle" onclick="resetBreathing()">
-          Einatmen<br>(4 Sek)
+        <div class="breathing-circle" id="breathingCircle" onclick="toggleBreathing()">
+          Einatmen<br><span id="breathingTime">(4 Sek)</span>
         </div>
-        <p class="breathing-instruction">Klick auf Kreis oder folge dem Rhythmus: Einatmen (4) → Halten (7) → Ausatmen (8)</p>
+        <p class="breathing-instruction" id="instruction">
+          Folge dem Rhythmus: <strong>Einatmen (4) → Halten (7) → Ausatmen (8)</strong>
+        </p>
+        <div class="breathing-controls">
+          <button class="breathing-btn-small" onclick="pauseBreathing()" id="pauseBtn">⏸ Pause</button>
+          <button class="breathing-btn-small" onclick="resetBreathing()">🔄 Neustarten</button>
+        </div>
+      </div>
+
+      <!-- INFO CARDS -->
+      <div class="card card--blue">
+        <h3>📍 Wann welche Technik?</h3>
+        <p><strong>4-7-8:</strong> Für tiefe Entspannung + Schlaf (abends)<br>
+        <strong>Box:</strong> Für akute Panik (schneller Effekt)<br>
+        <strong>Kohärenz:</strong> Für tägliche Balance (jederzeit)</p>
       </div>
 
       <div class="card card--blue">
-        <h3>📍 Alternative: Box-Breathing</h3>
-        <p>Ein (4) → Halten (4) → Aus (4) → Halten (4) → Wiederholen. Schneller Effekt.</p>
-      </div>
-
-      <div class="card card--blue">
-        <h3>📍 Längeres Ausatmen</h3>
-        <p><strong>Merksatz:</strong> Langes Ausatmen = Entspannung. Versuche Ausatmen länger zu machen (z.B. 3 ein, 5 aus).</p>
+        <h3>💡 Profi-Tipp</h3>
+        <p>Beginne mit deiner Nase: <strong>Einatmen durch Nase, Ausatmen durch Mund</strong> verstärkt die Entspannung um 30%!</p>
       </div>
     </div>
 
@@ -662,11 +759,11 @@
       </div>
     </div>
 
-    <!-- DANGER ZONE -->
-    <div class="card card--red" style="margin-top: 28px;">
-      <h3>⚠️ LEBENSBEDROHLICH? 112 anrufen!</h3>
-      <p style="margin-bottom: 8px;"><strong>Sofort:</strong> Gedanken sich zu verletzen • Starke Brustschmerzen + Atemnot • Asthmaanfall • Unkontrolliertes Zittern + Verwirrtheit</p>
-      <p><strong>KEIN Notfall (116 117):</strong> Panikattacken, Angst, Traurigkeit (auch wenn schlecht)</p>
+    <!-- HELP ZONE (nicht gefährlich - beruhigend) -->
+    <div class="card card--blue-light" style="margin-top: 28px;">
+      <h3>ℹ️ Wann sollte ich 112 anrufen?</h3>
+      <p style="margin-bottom: 8px;"><strong>Sofort bei:</strong> Gedanken sich zu verletzen • Starke Brustschmerzen + Atemnot • Asthmaanfall • Unkontrolliertes Zittern + Verwirrtheit</p>
+      <p><strong>KEIN Notfall:</strong> Panikattacken, Angst, Traurigkeit (auch wenn schlecht) → Seelsorge: 0800 1110111</p>
     </div>
 
   </div>
@@ -679,37 +776,116 @@
   </div>
 
   <script>
-    // BREATHING ANIMATION
+    // ADVANCED BREATHING SYSTEM
     const breathingCircle = document.getElementById('breathingCircle');
-    let phase = 0;
+    const instruction = document.getElementById('instruction');
+    let currentTechnique = '478';
+    let isBreathingActive = true;
     let breathingInterval = null;
-    const phases = [
-      { text: 'Einatmen<br>(4 Sek)', duration: 4000 },
-      { text: 'Halten<br>(7 Sek)', duration: 7000 },
-      { text: 'Ausatmen<br>(8 Sek)', duration: 8000 }
-    ];
+
+    const breathingTechniques = {
+      '478': {
+        name: '4-7-8 Entspannung',
+        phases: [
+          { text: 'Einatmen<br>', time: '4 Sek', duration: 4000, action: 'inhale' },
+          { text: 'Halten<br>', time: '7 Sek', duration: 7000, action: 'hold' },
+          { text: 'Ausatmen<br>', time: '8 Sek', duration: 8000, action: 'exhale' }
+        ],
+        instruction: 'Einatmen (4) → Halten (7) → Ausatmen (8) – Tiefe Entspannung'
+      },
+      'box': {
+        name: 'Box-Breathing',
+        phases: [
+          { text: 'Einatmen<br>', time: '4 Sek', duration: 4000, action: 'inhale' },
+          { text: 'Halten<br>', time: '4 Sek', duration: 4000, action: 'hold' },
+          { text: 'Ausatmen<br>', time: '4 Sek', duration: 4000, action: 'exhale' },
+          { text: 'Halten<br>', time: '4 Sek', duration: 4000, action: 'hold' }
+        ],
+        instruction: 'Ein (4) → Halten (4) → Aus (4) → Halten (4) – Schneller Effekt'
+      },
+      'kohaerence': {
+        name: 'Kohärenz-Atmung',
+        phases: [
+          { text: 'Einatmen<br>', time: '5 Sek', duration: 5000, action: 'inhale' },
+          { text: 'Ausatmen<br>', time: '5 Sek', duration: 5000, action: 'exhale' }
+        ],
+        instruction: 'Ein (5) → Aus (5) – Harmonischer Rhythmus für tägliche Balance'
+      }
+    };
+
+    function switchTechnique(technique) {
+      currentTechnique = technique;
+      document.querySelectorAll('.breathing-option').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`[data-technique="${technique}"]`).classList.add('active');
+      
+      instruction.textContent = breathingTechniques[technique].instruction;
+      resetBreathing();
+    }
 
     function runBreathingCycle() {
-      if (breathingInterval) clearTimeout(breathingInterval);
-      phase = 0;
+      if (!isBreathingActive) return;
+      
+      const phases = breathingTechniques[currentTechnique].phases;
+      let phaseIndex = 0;
+      
+      function runPhase() {
+        if (!isBreathingActive) return;
+        
+        const phase = phases[phaseIndex];
+        const timeText = phase.time;
+        
+        breathingCircle.innerHTML = phase.text + `<span id="breathingTime">(${timeText})</span>`;
+        
+        if (navigator.vibrate) {
+          navigator.vibrate([50]);
+        }
+        
+        if (phase.action === 'inhale') {
+          breathingCircle.style.animation = 'breathing-inhale 4s ease-in-out forwards';
+        } else if (phase.action === 'exhale') {
+          breathingCircle.style.animation = 'breathing-exhale 4s ease-in-out forwards';
+        }
+        
+        breathingInterval = setTimeout(() => {
+          phaseIndex++;
+          if (phaseIndex < phases.length) {
+            runPhase();
+          } else {
+            runBreathingCycle();
+          }
+        }, phase.duration);
+      }
+      
       runPhase();
     }
 
-    function runPhase() {
-      const current = phases[phase];
-      breathingCircle.innerHTML = current.text;
-      breathingInterval = setTimeout(() => {
-        phase++;
-        if (phase < phases.length) runPhase();
-        else runBreathingCycle();
-      }, current.duration);
+    function pauseBreathing() {
+      isBreathingActive = !isBreathingActive;
+      const pauseBtn = document.getElementById('pauseBtn');
+      
+      if (isBreathingActive) {
+        pauseBtn.textContent = '⏸ Pause';
+        runBreathingCycle();
+      } else {
+        pauseBtn.textContent = '▶ Fortsetzen';
+        if (breathingInterval) clearTimeout(breathingInterval);
+      }
+    }
+
+    function toggleBreathing() {
+      pauseBreathing();
     }
 
     function resetBreathing() {
+      isBreathingActive = true;
+      if (breathingInterval) clearTimeout(breathingInterval);
+      document.getElementById('pauseBtn').textContent = '⏸ Pause';
       runBreathingCycle();
     }
 
-    // Auto-start breathing
+    // Start breathing
     runBreathingCycle();
 
     // QUICK NAV
@@ -719,12 +895,15 @@
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
 
-    // EMERGENCY BUTTONS
+    // EMERGENCY BUTTONS - SAFARI FIX
     function call(number) {
-      // On mobile: tel: protocol
-      // On desktop: just show confirmation
+      const cleanNumber = number.replace(/\s/g, '');
+      
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        window.location.href = `tel:${number.replace(/\s/g, '')}`;
+        // Mobile: Confirm before calling
+        if (confirm(`📞 Jetzt anrufen?\n\n${number}`)) {
+          window.location.href = `tel:${cleanNumber}`;
+        }
       } else {
         alert(`📞 Anrufen: ${number}`);
       }
