@@ -2,13 +2,16 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>🧠 Panik-Hilfe – Sofort-Maßnahmen</title>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    
+
     body {
       background: #f0f4f9;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -17,16 +20,13 @@
       color: #2d3748;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1000px; margin: 0 auto; }
 
     /* ===== HEADER / EMERGENCY ===== */
     .header {
       background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
       color: white;
-      padding: 25px 20px 16px;
+      padding: calc(18px + env(safe-area-inset-top)) 20px 16px;
       text-align: center;
       position: sticky;
       top: 0;
@@ -54,27 +54,30 @@
       border-top: 2px solid rgba(255,255,255,0.3);
     }
     .emergency-btn {
+      display: block;
       background: rgba(255,255,255,0.15);
       border: 2px solid white;
       color: white;
       padding: 12px 8px;
       border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 13px;
       text-align: center;
       transition: all 0.2s;
       line-height: 1.3;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
     .emergency-btn:hover {
       background: white;
       color: #0ea5e9;
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
     .emergency-btn .number {
       display: block;
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 2px;
     }
 
@@ -83,14 +86,15 @@
       background: rgba(255,255,255,0.12);
       border-top: 2px solid rgba(255,255,255,0.3);
       margin-top: 14px;
-      padding-top: 12px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 10px;
     }
     .personal-label {
       font-size: 11px;
-      opacity: 0.8;
+      opacity: 0.9;
       margin-bottom: 8px;
-      font-weight: 500;
+      font-weight: 600;
+      text-align: left;
     }
     .personal-buttons {
       display: grid;
@@ -102,9 +106,9 @@
       border: 1px solid rgba(255,255,255,0.5);
       color: white;
       padding: 10px 6px;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 11px;
       text-align: center;
       transition: all 0.2s;
@@ -113,17 +117,18 @@
     .personal-btn:hover {
       background: rgba(255,255,255,0.22);
       border-color: white;
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
     .personal-btn .name {
       display: block;
-      font-size: 12px;
+      font-size: 13px;
       margin-bottom: 2px;
-      font-weight: 700;
+      font-weight: 800;
     }
-    .personal-btn .number {
-      font-size: 9px;
-      opacity: 0.9;
+    .personal-btn .role {
+      font-size: 10px;
+      opacity: 0.95;
+      display: block;
     }
 
     /* ===== QUICK NAV TABS ===== */
@@ -135,42 +140,36 @@
       overflow-x: auto;
       border-bottom: 1px solid #e2e8f0;
       position: sticky;
-      top: 130px;
+      /* top wird per JS auf Header-Höhe gesetzt */
+      top: 0;
       z-index: 50;
       margin-bottom: 20px;
     }
     .nav-btn {
-      padding: 6px 12px;
+      padding: 8px 12px;
       background: #f0f4f8;
       border: none;
       border-radius: 20px;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
       transition: all 0.2s;
       color: #555;
     }
-    .nav-btn:hover {
-      background: #e2e8f0;
-    }
+    .nav-btn:hover { background: #e2e8f0; }
     .nav-btn.active {
       background: #0ea5e9;
       color: white;
     }
 
     /* ===== MAIN CONTENT ===== */
-    .content {
-      padding: 0 20px 40px;
-    }
+    .content { padding: 0 20px 40px; }
 
-    /* Card Container */
-    .section-group {
-      margin-bottom: 28px;
-    }
+    .section-group { margin-bottom: 28px; }
     .section-title {
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
       color: #1f2937;
       margin-bottom: 14px;
       display: flex;
@@ -194,13 +193,9 @@
     }
     .card--blue { border-left-color: #0ea5e9; }
     .card--blue-light { border-left-color: #06b6d4; }
-    .card--green { border-left-color: #10b981; }
-    .card--yellow { border-left-color: #f59e0b; }
-    .card--purple { border-left-color: #a855f7; }
-
     .card h3 {
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 800;
       margin-bottom: 8px;
       color: #1f2937;
     }
@@ -214,48 +209,79 @@
     /* ===== BREATHING SECTION ===== */
     .breathing-container {
       text-align: center;
-      padding: 30px 20px;
+      padding: 22px 18px;
       background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
       border-radius: 12px;
       border: 2px solid #0ea5e9;
     }
+    .breathing-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .breathing-option {
+      padding: 12px 10px;
+      background: #f0f4f8;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 12px;
+      text-align: center;
+      transition: all 0.2s;
+      color: #555;
+    }
+    .breathing-option:hover { background: #e2e8f0; border-color: #0ea5e9; }
+    .breathing-option.active { background: #0ea5e9; color: white; border-color: #0284c7; }
+
     .breathing-circle {
       width: 140px;
       height: 140px;
-      margin: 0 auto 16px;
+      margin: 0 auto 12px;
       border-radius: 50%;
       background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-weight: 700;
+      font-weight: 900;
       font-size: 15px;
       text-align: center;
-      animation: breathing 8s infinite;
       cursor: pointer;
       box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
-    }
-    @keyframes breathing {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
-    }
-    .breathing-circle:hover {
-      animation: none;
-      transform: scale(1.15);
+      transform: scale(1);
+      transition: transform 0.25s ease-in-out;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
     .breathing-instruction {
       font-size: 12px;
       color: #0c4a6e;
-      font-weight: 500;
+      font-weight: 700;
     }
+    .breathing-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .breathing-btn-small {
+      padding: 9px 14px;
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid #0ea5e9;
+      color: #0ea5e9;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .breathing-btn-small:hover { background: #0ea5e9; color: white; }
 
     /* ===== CHECKLIST ===== */
-    .checklist {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .checklist { display: flex; flex-direction: column; gap: 8px; }
     .checklist-item {
       display: flex;
       gap: 10px;
@@ -265,12 +291,9 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .checklist-item:hover {
-      background: #dcfce7;
-    }
+    .checklist-item:hover { background: #dcfce7; }
     .checklist-item input {
-      width: 18px;
-      height: 18px;
+      width: 18px; height: 18px;
       margin-top: 1px;
       cursor: pointer;
       accent-color: #10b981;
@@ -285,7 +308,7 @@
     }
     .checklist-item input:checked + label {
       color: #10b981;
-      font-weight: 600;
+      font-weight: 800;
       text-decoration: line-through;
     }
 
@@ -316,12 +339,10 @@
       justify-content: center;
       font-size: 40px;
     }
-    .music-content {
-      padding: 12px;
-    }
+    .music-content { padding: 12px; }
     .music-content h4 {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 900;
       color: #0ea5e9;
       margin-bottom: 4px;
     }
@@ -333,21 +354,20 @@
     }
     .music-btn {
       width: 100%;
-      padding: 8px;
+      padding: 9px;
       background: #0ea5e9;
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 900;
       cursor: pointer;
       transition: all 0.2s;
       text-decoration: none;
       display: block;
+      text-align: center;
     }
-    .music-btn:hover {
-      background: #0284c7;
-    }
+    .music-btn:hover { background: #0284c7; }
 
     /* ===== TECHNIQUE LIST ===== */
     .technique-item {
@@ -360,7 +380,7 @@
     }
     .technique-item h4 {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 900;
       color: #10b981;
       margin-bottom: 6px;
     }
@@ -380,26 +400,9 @@
       margin: 14px 0;
       border-left: 4px solid;
     }
-    .alert--info {
-      background: #f0f4f8;
-      border-left-color: #0ea5e9;
-      color: #0c4a6e;
-    }
-    .alert--success {
-      background: #f0fdf4;
-      border-left-color: #10b981;
-      color: #166534;
-    }
-    .alert--warning {
-      background: #fef3c7;
-      border-left-color: #f59e0b;
-      color: #92400e;
-    }
-    .alert--calm {
-      background: #f0f9ff;
-      border-left-color: #0ea5e9;
-      color: #0c4a6e;
-    }
+    .alert--success { background: #f0fdf4; border-left-color: #10b981; color: #166534; }
+    .alert--warning { background: #fef3c7; border-left-color: #f59e0b; color: #92400e; }
+    .alert--calm { background: #f0f9ff; border-left-color: #0ea5e9; color: #0c4a6e; }
 
     /* ===== FOOTER ===== */
     .footer {
@@ -411,98 +414,65 @@
       color: #666;
       margin-top: 40px;
     }
-    .footer p {
-      margin: 4px 0;
-    }
-    .footer a {
-      color: #0ea5e9;
-      text-decoration: none;
-    }
-    .footer a:hover {
-      text-decoration: underline;
-    }
+    .footer p { margin: 4px 0; }
+    .footer a { color: #0ea5e9; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
 
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
-      .header {
-        padding: 18px 16px 12px;
-      }
-      .header h1 {
-        font-size: 24px;
-      }
-      .emergency-buttons {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-      }
-      .personal-buttons {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-      }
-      .quick-nav {
-        top: 110px;
-      }
-      .content {
-        padding: 0 16px 30px;
-      }
-      .music-grid {
-        grid-template-columns: 1fr;
-      }
-      .breathing-circle {
-        width: 120px;
-        height: 120px;
-        font-size: 13px;
-      }
+      .header { padding: calc(16px + env(safe-area-inset-top)) 16px 12px; }
+      .header h1 { font-size: 24px; }
+
+      .emergency-buttons { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .personal-buttons { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .content { padding: 0 16px 30px; }
+      .music-grid { grid-template-columns: 1fr; }
+      .breathing-circle { width: 120px; height: 120px; font-size: 13px; }
     }
   </style>
 </head>
 
 <body>
   <!-- STICKY HEADER + EMERGENCY -->
-  <div class="header">
+  <div class="header" id="header">
     <h1>🧠 Panik-Hilfe</h1>
     <p><strong>Du bist nicht allein. Es gibt Hilfe.</strong></p>
-    
-    <div class="emergency-buttons">
-      <button class="emergency-btn" onclick="call('112')">
-        <span class="number">112</span>
-        Notfall
-      </button>
-      <button class="emergency-btn" onclick="call('110')">
-        <span class="number">110</span>
-        Polizei
+
+    <!-- Emergency: ohne Confirm (im Notfall KEIN Popup) -->
+    <div class="emergency-buttons" aria-label="Notruf-Buttons">
+      <a class="emergency-btn" href="tel:112"><span class="number">112</span>Notfall</a>
+      <a class="emergency-btn" href="tel:110"><span class="number">110</span>Polizei</a>
+      <a class="emergency-btn" href="tel:116123"><span class="number">116 123</span>Seelsorge</a>
+      <a class="emergency-btn" href="tel:116117"><span class="number">116 117</span>Ärztl. Dienst</a>
     </div>
 
     <!-- PERSONAL CONTACTS -->
     <div class="personal-contacts">
       <div class="personal-label">👨‍👩‍👧‍👦 DEINE VERTRAUTEN (Schnell anrufen)</div>
       <div class="personal-buttons">
-        <button class="personal-btn" onclick="call('017632375497')">
-          <span class="name">Malika</span>
-          <span class="number">(Tochter)</span>
+        <button class="personal-btn" onclick="callContact('017632375497','Malika')">
+          <span class="name">Malika</span><span class="role">(Tochter)</span>
         </button>
-        <button class="personal-btn" onclick="call('017848024370')">
-          <span class="name">Yessin</span>
-          <span class="number">(Sohn)</span>
+        <button class="personal-btn" onclick="callContact('017848024370','Yessin')">
+          <span class="name">Yessin</span><span class="role">(Sohn)</span>
         </button>
-        <button class="personal-btn" onclick="call('015228840400')">
-          <span class="name">Karim</span>
-          <span class="number">(Sohn)</span>
+        <button class="personal-btn" onclick="callContact('015228840400','Karim')">
+          <span class="name">Karim</span><span class="role">(Sohn)</span>
         </button>
-        <button class="personal-btn" onclick="call('017624300762')">
-          <span class="name">Sascha</span>
-          <span class="number">(Partner)</span>
+        <button class="personal-btn" onclick="callContact('017624300762','Sascha')">
+          <span class="name">Sascha</span><span class="role">(Partner)</span>
         </button>
       </div>
     </div>
   </div>
 
   <!-- QUICK NAV -->
-  <div class="quick-nav">
-    <button class="nav-btn active" onclick="scrollTo('sofort')">⚡ Sofort</button>
-    <button class="nav-btn" onclick="scrollTo('atmen')">💨 Atmen</button>
-    <button class="nav-btn" onclick="scrollTo('musik')">🎵 Musik</button>
-    <button class="nav-btn" onclick="scrollTo('techniken')">🧠 Techniken</button>
-    <button class="nav-btn" onclick="scrollTo('langfristig')">💚 Langfristig</button>
+  <div class="quick-nav" id="quickNav">
+    <button class="nav-btn active" data-target="sofort">⚡ Sofort</button>
+    <button class="nav-btn" data-target="atmen">💨 Atmen</button>
+    <button class="nav-btn" data-target="musik">🎵 Musik</button>
+    <button class="nav-btn" data-target="techniken">🧠 Techniken</button>
+    <button class="nav-btn" data-target="langfristig">💚 Langfristig</button>
   </div>
 
   <!-- MAIN CONTENT -->
@@ -511,7 +481,7 @@
     <!-- 1. SOFORT-MASSNAHMEN -->
     <div class="section-group" id="sofort">
       <div class="section-title">⚡ Sofort-Maßnahmen (2 Minuten)</div>
-      
+
       <div class="checklist">
         <div class="checklist-item">
           <input type="checkbox" id="check1">
@@ -519,60 +489,85 @@
         </div>
         <div class="checklist-item">
           <input type="checkbox" id="check2">
-          <label for="check2"><strong>Atmen:</strong> Ein (4 Sek), Aus (6 Sek)</label>
+          <label for="check2"><strong>Atmen:</strong> Ein (4 Sek), Aus (6 Sek) oder Box (4-4-4-4)</label>
         </div>
         <div class="checklist-item">
           <input type="checkbox" id="check3">
-          <label for="check3"><strong>Kontakt:</strong> Jemanden anrufen oder Seelsorge</label>
+          <label for="check3"><strong>Kontakt:</strong> Jemanden anrufen oder 116 123</label>
         </div>
         <div class="checklist-item">
           <input type="checkbox" id="check4">
-          <label for="check4"><strong>Grounding:</strong> 5 sehen, 4 anfassen, 3 hören</label>
+          <label for="check4"><strong>Grounding:</strong> 5 sehen, 4 anfassen, 3 hören, 2 riechen, 1 schmecken</label>
         </div>
         <div class="checklist-item">
           <input type="checkbox" id="check5">
-          <label for="check5"><strong>Kaltwasser:</strong> Gesicht waschen (schnell entspannen)</label>
+          <label for="check5"><strong>Kaltwasser:</strong> Kurz Gesicht waschen (wenn du sicher stehst/sitzt)</label>
         </div>
       </div>
 
       <div class="alert alert--calm">
-        <strong>⏱️ Wichtig:</strong> Panikattacken dauern 5–20 Min. Du wirst wieder normal atmen. Es ist sicher.
+        <strong>⏱️ Wichtig:</strong> Panik geht vorbei. Du bist nicht „kaputt“ – dein Nervensystem ist gerade im Alarm.
       </div>
     </div>
 
     <!-- 2. ATEMTECHNIKEN -->
     <div class="section-group" id="atmen">
-      <div class="section-title">💨 Atemtechniken (Wissenschaftlich bewährt)</div>
-      
+      <div class="section-title">💨 Atemtechniken (Wähle deine Methode)</div>
+
+      <div class="breathing-selector">
+        <button class="breathing-option active" data-technique="478">
+          <strong>4-7-8</strong><br><small>Tiefe Entspannung</small>
+        </button>
+        <button class="breathing-option" data-technique="box">
+          <strong>Box</strong><br><small>Akut & Fokus</small>
+        </button>
+        <button class="breathing-option" data-technique="kohaerence">
+          <strong>Kohärenz</strong><br><small>5-5 Rhythmus</small>
+        </button>
+      </div>
+
       <div class="breathing-container">
-        <div class="breathing-circle" id="breathingCircle" onclick="resetBreathing()">
-          Einatmen<br>(4 Sek)
+        <div class="breathing-circle" id="breathingCircle" title="Tippen: Pause/Fortsetzen">
+          Einatmen<br><span id="breathingTime">(4 Sek)</span>
         </div>
-        <p class="breathing-instruction">Klick auf Kreis oder folge dem Rhythmus: Einatmen (4) → Halten (7) → Ausatmen (8)</p>
+
+        <p class="breathing-instruction" id="instruction">
+          Folge dem Rhythmus: <strong>Einatmen (4) → Halten (7) → Ausatmen (8)</strong>
+        </p>
+
+        <div class="breathing-controls">
+          <button class="breathing-btn-small" id="pauseBtn">⏸ Pause</button>
+          <button class="breathing-btn-small" id="resetBtn">🔄 Neustarten</button>
+          <button class="breathing-btn-small" id="vibeBtn" aria-pressed="false">📳 Vibration: Aus</button>
+        </div>
       </div>
 
       <div class="card card--blue">
-        <h3>📍 Alternative: Box-Breathing</h3>
-        <p>Ein (4) → Halten (4) → Aus (4) → Halten (4) → Wiederholen. Schneller Effekt.</p>
+        <h3>📍 Wann welche Technik?</h3>
+        <p>
+          <strong>Box:</strong> Akut, schnell, stabilisiert.<br>
+          <strong>4-7-8:</strong> Tiefe Entspannung (nicht perfekt, einfach mitmachen).<br>
+          <strong>Kohärenz:</strong> Sanft, täglich, stabil.
+        </p>
       </div>
 
       <div class="card card--blue">
-        <h3>📍 Längeres Ausatmen</h3>
-        <p><strong>Merksatz:</strong> Langes Ausatmen = Entspannung. Versuche Ausatmen länger zu machen (z.B. 3 ein, 5 aus).</p>
+        <h3>💡 Wichtig (statt Fake-Prozent)</h3>
+        <p>Wenn dir schwindlig wird: kürzer, langsamer, oder kurz normal atmen. Hauptsache dranbleiben.</p>
       </div>
     </div>
 
     <!-- 3. MUSIK -->
     <div class="section-group" id="musik">
-      <div class="section-title">🎵 Entspannungsmusik (YouTube, Kostenlos)</div>
-      
+      <div class="section-title">🎵 Entspannungsmusik (YouTube)</div>
+
       <div class="music-grid">
         <div class="music-card">
           <div class="music-thumb">🏝️</div>
           <div class="music-content">
             <h4>Beruhige deine Gedanken</h4>
             <p>4+ Stunden Beach-Entspannung</p>
-            <a href="https://www.youtube.com/watch?v=kRakh3ifEMQ" target="_blank" class="music-btn">▶ Öffnen</a>
+            <a href="https://www.youtube.com/watch?v=kRakh3ifEMQ" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
           </div>
         </div>
 
@@ -581,7 +576,7 @@
           <div class="music-content">
             <h4>Wasserfall – 4K</h4>
             <p>2+ Stunden Naturgeräusche</p>
-            <a href="https://www.youtube.com/watch?v=g_3cIWgZ5C8" target="_blank" class="music-btn">▶ Öffnen</a>
+            <a href="https://www.youtube.com/watch?v=g_3cIWgZ5C8" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
           </div>
         </div>
 
@@ -589,160 +584,269 @@
           <div class="music-thumb">🌙</div>
           <div class="music-content">
             <h4>Meditation zum Einschlafen</h4>
-            <p>1,5+ Stunden Tiefe</p>
-            <a href="https://www.youtube.com/watch?v=f9yLPqHFjSU" target="_blank" class="music-btn">▶ Öffnen</a>
+            <p>1,5+ Stunden</p>
+            <a href="https://www.youtube.com/watch?v=f9yLPqHFjSU" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
           </div>
         </div>
       </div>
 
       <div class="alert alert--success">
-        <strong>💡 Tipp:</strong> YouTube Videos offline speichern (Premium oder yt-dlp). Lieblings-Playlist erstellen!
+        <strong>💡 Tipp:</strong> Wenn Netz schlecht ist: lieber eine feste Offline-Playlist vorbereiten.
       </div>
     </div>
 
     <!-- 4. WEITERE TECHNIKEN -->
     <div class="section-group" id="techniken">
       <div class="section-title">🧠 Weitere Entspannungstechniken</div>
-      
+
       <div class="technique-item">
         <h4>🎯 5-4-3-2-1 Grounding (2–3 Min)</h4>
-        <p>Was kannst du sehen? anfassen? hören? riechen? schmecken? → Lenkt Aufmerksamkeit weg von Angst.</p>
+        <p>5 sehen · 4 fühlen · 3 hören · 2 riechen · 1 schmecken → holt dich zurück ins Jetzt.</p>
       </div>
 
       <div class="technique-item">
-        <h4>💪 Progressive Muskelentspannung (10 Min)</h4>
-        <p>Muskeln 5 Sek anspannen → 10 Sek entspannen. Von Füßen bis Kopf. Sagt Körper: „Ich bin sicher."</p>
+        <h4>💪 Progressive Muskelentspannung (5–10 Min)</h4>
+        <p>5 Sek anspannen → 10 Sek lösen. Füße bis Kopf. Körper checkt: „Alarm ist vorbei“.</p>
       </div>
 
       <div class="technique-item">
         <h4>🚶 Bewegung (5–10 Min)</h4>
-        <p>Spaziergang, Dehnen, Treppe. Baut Adrenalin ab und entspannt sofort.</p>
+        <p>Spaziergang, Dehnen, Treppe. Adrenalin kann so „raus“.</p>
       </div>
 
       <div class="technique-item">
-        <h4>❄️ Kalte Dusche / Kalt-Warm</h4>
-        <p>30 Sek kaltes Wasser ins Gesicht: Aktiviert Vagusnerv, beruhigt sofort.</p>
-      </div>
-
-      <div class="technique-item">
-        <h4>🧘 Yoga & Dehnen (YouTube)</h4>
-        <p>Suche „Yoga für Anfänger" oder „Angst Dehnen". 15–20 Min reichen.</p>
+        <h4>❄️ Kaltwasser (kurz & sicher)</h4>
+        <p>Wenn du stabil sitzt/stehst: kurz kaltes Wasser ins Gesicht – kann beruhigen.</p>
       </div>
     </div>
 
     <!-- 5. LANGFRISTIG -->
     <div class="section-group" id="langfristig">
       <div class="section-title">💚 Langfristige Unterstützung</div>
-      
+
       <div class="checklist">
         <div class="checklist-item">
           <input type="checkbox" id="long1">
-          <label for="long1"><strong>Therapie:</strong> KVT oder Schematherapie (<a href="https://www.psychotherapie-verband.de" target="_blank" style="color: #0ea5e9;">Therapeut:innensuche</a>)</label>
+          <label for="long1"><strong>Therapie:</strong> KVT oder Schema (Therapeut:innensuche)</label>
         </div>
         <div class="checklist-item">
           <input type="checkbox" id="long2">
-          <label for="long2"><strong>Hausarzt:</strong> Ärztliche Bewertung + ggf. Medikamente</label>
+          <label for="long2"><strong>Hausarzt:</strong> Abklärung + Plan</label>
         </div>
         <div class="checklist-item">
           <input type="checkbox" id="long3">
-          <label for="long3"><strong>Apps:</strong> Headspace, 7Mind, Insight Timer (kostenlos/günstig)</label>
+          <label for="long3"><strong>Routine:</strong> Schlaf, Essen, Bewegung (klein anfangen)</label>
         </div>
         <div class="checklist-item">
           <input type="checkbox" id="long4">
-          <label for="long4"><strong>Buch:</strong> „Raus aus der Angstfalle" (David D. Clark)</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="long5">
-          <label for="long5"><strong>Tagebuch:</strong> Panik-Auslöser notieren → Muster erkennen</label>
+          <label for="long4"><strong>Tagebuch:</strong> Auslöser/Was half → Muster erkennen</label>
         </div>
       </div>
 
       <div class="alert alert--warning">
-        <strong>💬 Für Angehörige:</strong> Nicht sagen „Stell dich nicht so an". Stattdessen: „Ich bin da, du wirst wieder normal atmen." Validierung hilft mehr.
+        <strong>Für Angehörige:</strong> Nicht diskutieren. Einfach sagen: „Ich bin da. Atme mit mir.“
       </div>
     </div>
 
-    <!-- HELP ZONE (nicht gefährlich - beruhigend) -->
     <div class="card card--blue-light" style="margin-top: 28px;">
       <h3>ℹ️ Wann sollte ich 112 anrufen?</h3>
-      <p style="margin-bottom: 8px;"><strong>Sofort bei:</strong> Gedanken sich zu verletzen • Starke Brustschmerzen + Atemnot • Asthmaanfall • Unkontrolliertes Zittern + Verwirrtheit</p>
-      <p><strong>KEIN Notfall:</strong> Panikattacken, Angst, Traurigkeit (auch wenn schlecht) → Seelsorge: 0800 1110111</p>
+      <p><strong>Sofort bei:</strong> Gedanken dich zu verletzen • starke Brustschmerzen + Atemnot • Verwirrtheit/Blackout • medizinischer Notfall.</p>
+      <p style="margin-top:8px;"><strong>Auch okay:</strong> wenn du unsicher bist. Lieber einmal zu viel.</p>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
   <div class="footer">
     <p><strong>Für deine Mum</strong> – Mit ❤️ von Karim</p>
-    <p>Diese Seite ersetzt keine professionelle Hilfe. <strong>Bei Notfällen: 112 oder Telefonseelsorge 0800 1110111</strong></p>
-    <p style="margin-top: 8px; font-size: 11px; opacity: 0.7;">Dezember 2024 | Quellen: Deutsches Netzwerk für Angststörungen, Bundespsychotherapeutenkammer</p>
+    <p>Diese Seite ersetzt keine professionelle Hilfe. <strong>Notfall: 112 · Seelsorge: 116 123</strong></p>
+    <p style="margin-top: 8px; font-size: 11px; opacity: 0.7;">Stand: Dez 2024</p>
   </div>
 
   <script>
-    // BREATHING ANIMATION
-    const breathingCircle = document.getElementById('breathingCircle');
-    let phase = 0;
-    let breathingInterval = null;
-    const phases = [
-      { text: 'Einatmen<br>(4 Sek)', duration: 4000 },
-      { text: 'Halten<br>(7 Sek)', duration: 7000 },
-      { text: 'Ausatmen<br>(8 Sek)', duration: 8000 }
-    ];
+    // ===== Sticky QuickNav: exakt unter dem Header kleben =====
+    const headerEl = document.getElementById('header');
+    const quickNavEl = document.getElementById('quickNav');
 
-    function runBreathingCycle() {
-      if (breathingInterval) clearTimeout(breathingInterval);
-      phase = 0;
-      runPhase();
+    function updateStickyOffset() {
+      const h = headerEl.offsetHeight || 0;
+      quickNavEl.style.top = h + 'px';
     }
+    window.addEventListener('resize', updateStickyOffset);
+    window.addEventListener('load', updateStickyOffset);
+    updateStickyOffset();
 
-    function runPhase() {
-      const current = phases[phase];
-      breathingCircle.innerHTML = current.text;
-      breathingInterval = setTimeout(() => {
-        phase++;
-        if (phase < phases.length) runPhase();
-        else runBreathingCycle();
-      }, current.duration);
-    }
-
-    function resetBreathing() {
-      runBreathingCycle();
-    }
-
-    // Auto-start breathing
-    runBreathingCycle();
-
-    // QUICK NAV
-    function scrollTo(id) {
+    // ===== Quick Nav (kein Konflikt mit window.scrollTo) =====
+    function setActiveNav(targetId) {
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+      if (btn) btn.classList.add('active');
     }
 
-    // EMERGENCY BUTTONS
-    function call(number) {
-      // On mobile: tel: protocol
-      // On desktop: just show confirmation
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        window.location.href = `tel:${number.replace(/\s/g, '')}`;
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-target');
+        const el = document.getElementById(id);
+        if (el) {
+          setActiveNav(id);
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ===== Anrufe =====
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // Für persönliche Kontakte: leichte Absicherung ok.
+    function callContact(number, name) {
+      const clean = (number || '').replace(/[^\d+]/g, '');
+      if (!clean) return;
+
+      if (isMobile) {
+        // Für private Kontakte darf Confirm bleiben (optional)
+        const ok = confirm(`📞 ${name} anrufen?\n\n${clean}`);
+        if (ok) window.location.href = `tel:${clean}`;
       } else {
-        alert(`📞 Anrufen: ${number}`);
+        alert(`📞 Bitte anrufen: ${name} – ${clean}`);
       }
     }
 
-    // CHECKLIST PERSISTENCE
+    // ===== Atemsystem (stabil, Phase-Dauer korrekt) =====
+    const breathingCircle = document.getElementById('breathingCircle');
+    const instruction = document.getElementById('instruction');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const vibeBtn = document.getElementById('vibeBtn');
+
+    let currentTechnique = '478';
+    let isBreathingActive = true;
+    let timer = null;
+    let vibe = false;
+
+    const breathingTechniques = {
+      '478': {
+        phases: [
+          { label: 'Einatmen', sec: 4, action: 'inhale' },
+          { label: 'Halten',   sec: 7, action: 'hold'   },
+          { label: 'Ausatmen', sec: 8, action: 'exhale' }
+        ],
+        info: 'Ein (4) → Halten (7) → Aus (8) – Entspannung'
+      },
+      'box': {
+        phases: [
+          { label: 'Einatmen', sec: 4, action: 'inhale' },
+          { label: 'Halten',   sec: 4, action: 'hold'   },
+          { label: 'Ausatmen', sec: 4, action: 'exhale' },
+          { label: 'Halten',   sec: 4, action: 'hold'   }
+        ],
+        info: 'Box: 4-4-4-4 – Akut & Fokus'
+      },
+      'kohaerence': {
+        phases: [
+          { label: 'Einatmen', sec: 5, action: 'inhale' },
+          { label: 'Ausatmen', sec: 5, action: 'exhale' }
+        ],
+        info: 'Kohärenz: 5-5 – sanft & stabil'
+      }
+    };
+
+    function vibratePing() {
+      if (!vibe) return;
+      if (navigator.vibrate) navigator.vibrate([35]);
+    }
+
+    function setCircle(label, sec, action) {
+      breathingCircle.innerHTML = `${label}<br><span id="breathingTime">(${sec} Sek)</span>`;
+      instruction.innerHTML = `Folge dem Rhythmus: <strong>${breathingTechniques[currentTechnique].info}</strong>`;
+
+      // Aktion: Scale hoch/runter; hold bleibt wie ist
+      if (action === 'inhale') {
+        breathingCircle.style.transform = 'scale(1.22)';
+      } else if (action === 'exhale') {
+        breathingCircle.style.transform = 'scale(1)';
+      } else {
+        // hold -> leicht stabil
+        breathingCircle.style.transform = breathingCircle.style.transform || 'scale(1)';
+      }
+    }
+
+    function clearTimer() {
+      if (timer) { clearTimeout(timer); timer = null; }
+    }
+
+    function runCycle() {
+      if (!isBreathingActive) return;
+
+      const phases = breathingTechniques[currentTechnique].phases;
+      let i = 0;
+
+      const next = () => {
+        if (!isBreathingActive) return;
+
+        const p = phases[i];
+        setCircle(p.label, p.sec, p.action);
+        vibratePing();
+
+        clearTimer();
+        timer = setTimeout(() => {
+          i = (i + 1) % phases.length;
+          next();
+        }, p.sec * 1000);
+      };
+
+      next();
+    }
+
+    function pauseBreathing() {
+      isBreathingActive = !isBreathingActive;
+      if (isBreathingActive) {
+        pauseBtn.textContent = '⏸ Pause';
+        runCycle();
+      } else {
+        pauseBtn.textContent = '▶ Fortsetzen';
+        clearTimer();
+      }
+    }
+
+    function resetBreathing() {
+      isBreathingActive = true;
+      pauseBtn.textContent = '⏸ Pause';
+      clearTimer();
+      breathingCircle.style.transform = 'scale(1)';
+      runCycle();
+    }
+
+    // Technique buttons
+    document.querySelectorAll('.breathing-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.breathing-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTechnique = btn.getAttribute('data-technique');
+        resetBreathing();
+      });
+    });
+
+    // Controls
+    breathingCircle.addEventListener('click', pauseBreathing);
+    pauseBtn.addEventListener('click', pauseBreathing);
+    resetBtn.addEventListener('click', resetBreathing);
+
+    vibeBtn.addEventListener('click', () => {
+      vibe = !vibe;
+      vibeBtn.textContent = vibe ? '📳 Vibration: An' : '📳 Vibration: Aus';
+      vibeBtn.setAttribute('aria-pressed', vibe ? 'true' : 'false');
+      vibratePing();
+    });
+
+    // Start breathing on load
+    resetBreathing();
+
+    // ===== Checklist Persistence =====
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
       const id = checkbox.id;
-      // Load from storage
       if (localStorage.getItem(id)) checkbox.checked = true;
-      
-      // Save on change
       checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-          localStorage.setItem(id, 'true');
-        } else {
-          localStorage.removeItem(id);
-        }
+        if (checkbox.checked) localStorage.setItem(id, 'true');
+        else localStorage.removeItem(id);
       });
     });
   </script>
