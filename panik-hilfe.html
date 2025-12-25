@@ -26,42 +26,83 @@
     .header {
       background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
       color: white;
-      padding: calc(18px + env(safe-area-inset-top)) 20px 16px;
+      padding: 16px 20px 14px;
       text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: relative;
       box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
     }
     .header h1 {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .header p {
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0.95;
-      margin: 0;
+      margin: 0 0 12px 0;
     }
 
-    /* Emergency Numbers - BIG & EASY */
+    /* ===== COLLAPSIBLE SECTIONS ===== */
+    .collapsible-section {
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 0;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    .section-toggle {
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.3s;
+    }
+
+    .section-toggle.open {
+      transform: rotate(180deg);
+    }
+
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .section-content.open {
+      max-height: 800px;
+      margin-top: 10px;
+    }
+
+    /* Emergency Numbers */
     .emergency-buttons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 2px solid rgba(255,255,255,0.3);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
     .emergency-btn {
       display: block;
       background: rgba(255,255,255,0.15);
       border: 2px solid white;
       color: white;
-      padding: 12px 8px;
-      border-radius: 10px;
+      padding: 10px 6px;
+      border-radius: 8px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       text-align: center;
       transition: all 0.2s;
       line-height: 1.3;
@@ -76,27 +117,14 @@
     }
     .emergency-btn .number {
       display: block;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
       margin-bottom: 2px;
     }
 
-    /* ===== MEDICATION SECTION ===== */
-    .medication-card {
-      margin-top: 14px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 12px;
-      text-align: left;
-    }
-    .medication-title {
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      opacity: 0.95;
-    }
+    /* Medication */
     .medication-note {
-      font-size: 11px;
+      font-size: 10px;
       opacity: 0.9;
       margin-bottom: 8px;
       line-height: 1.4;
@@ -106,67 +134,54 @@
       padding: 6px 8px;
       border-radius: 6px;
       border: none;
-      font-size: 12px;
-      margin-bottom: 10px;
+      font-size: 11px;
+      margin-bottom: 8px;
     }
     .medication-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 11px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 8px;
+      font-size: 10px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 6px;
       overflow: hidden;
     }
     .medication-table th,
     .medication-table td {
       border: 1px solid rgba(15, 23, 42, 0.15);
-      padding: 4px 6px;
+      padding: 4px;
       text-align: left;
     }
     .medication-table th {
       background: rgba(15, 23, 42, 0.9);
       color: #f9fafb;
       font-weight: 700;
-      font-size: 11px;
+      font-size: 10px;
     }
     .medication-table input {
       width: 100%;
       border: none;
       background: transparent;
-      font-size: 11px;
+      font-size: 10px;
       color: #111827;
+      padding: 2px;
     }
     .medication-table input:focus {
       outline: none;
       background: #e0f2fe;
     }
 
-    /* PERSONAL CONTACTS SECTION */
-    .personal-contacts {
-      background: rgba(255,255,255,0.12);
-      border-top: 2px solid rgba(255,255,255,0.3);
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 10px;
-    }
-    .personal-label {
-      font-size: 11px;
-      opacity: 0.9;
-      margin-bottom: 8px;
-      font-weight: 600;
-      text-align: left;
-    }
+    /* Personal Contacts */
     .personal-buttons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
     }
     .personal-btn {
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.5);
       color: white;
-      padding: 10px 6px;
-      border-radius: 10px;
+      padding: 8px 6px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: 700;
       font-size: 11px;
@@ -181,12 +196,12 @@
     }
     .personal-btn .name {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       margin-bottom: 2px;
       font-weight: 800;
     }
     .personal-btn .role {
-      font-size: 10px;
+      font-size: 9px;
       opacity: 0.95;
       display: block;
     }
@@ -194,22 +209,22 @@
     /* ===== QUICK NAV TABS ===== */
     .quick-nav {
       background: white;
-      padding: 12px 20px;
+      padding: 10px 16px;
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
       border-bottom: 1px solid #e2e8f0;
       position: sticky;
       top: 0;
       z-index: 50;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .nav-btn {
-      padding: 8px 12px;
+      padding: 7px 12px;
       background: #f0f4f8;
       border: none;
-      border-radius: 20px;
-      font-size: 13px;
+      border-radius: 18px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
@@ -223,14 +238,14 @@
     }
 
     /* ===== MAIN CONTENT ===== */
-    .content { padding: 0 20px 40px; }
+    .content { padding: 0 16px 40px; }
 
-    .section-group { margin-bottom: 28px; }
-    .section-title {
-      font-size: 18px;
+    .section-group { margin-bottom: 24px; }
+    .section-title-main {
+      font-size: 17px;
       font-weight: 800;
       color: #1f2937;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -239,9 +254,9 @@
     /* Cards */
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 12px;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       border-left: 4px solid;
       transition: all 0.2s;
@@ -253,13 +268,13 @@
     .card--blue { border-left-color: #0ea5e9; }
     .card--blue-light { border-left-color: #06b6d4; }
     .card h3 {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #1f2937;
     }
     .card p {
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.6;
       color: #555;
       margin-bottom: 0;
@@ -268,25 +283,25 @@
     /* ===== BREATHING SECTION ===== */
     .breathing-container {
       text-align: center;
-      padding: 22px 18px;
+      padding: 18px 14px;
       background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-      border-radius: 12px;
+      border-radius: 10px;
       border: 2px solid #0ea5e9;
     }
     .breathing-selector {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 10px;
-      margin-bottom: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
     }
     .breathing-option {
-      padding: 12px 10px;
+      padding: 10px 8px;
       background: #f0f4f8;
       border: 2px solid #e2e8f0;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: 800;
-      font-size: 12px;
+      font-size: 11px;
       text-align: center;
       transition: all 0.2s;
       color: #555;
@@ -295,9 +310,9 @@
     .breathing-option.active { background: #0ea5e9; color: white; border-color: #0284c7; }
 
     .breathing-circle {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 12px;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 10px;
       border-radius: 50%;
       background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
       display: flex;
@@ -305,7 +320,7 @@
       justify-content: center;
       color: white;
       font-weight: 900;
-      font-size: 15px;
+      font-size: 13px;
       text-align: center;
       cursor: pointer;
       box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
@@ -315,44 +330,44 @@
       -webkit-tap-highlight-color: transparent;
     }
     .breathing-instruction {
-      font-size: 12px;
+      font-size: 11px;
       color: #0c4a6e;
       font-weight: 700;
     }
     .breathing-controls {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       justify-content: center;
-      margin-top: 14px;
+      margin-top: 12px;
       flex-wrap: wrap;
     }
     .breathing-btn-small {
-      padding: 9px 14px;
+      padding: 7px 12px;
       background: rgba(14, 165, 233, 0.1);
       border: 1px solid #0ea5e9;
       color: #0ea5e9;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 800;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 11px;
       transition: all 0.2s;
     }
     .breathing-btn-small:hover { background: #0ea5e9; color: white; }
 
     /* ===== CHECKLIST ===== */
-    .checklist { display: flex; flex-direction: column; gap: 8px; }
+    .checklist { display: flex; flex-direction: column; gap: 6px; }
     .checklist-item {
       display: flex;
-      gap: 10px;
-      padding: 10px;
+      gap: 8px;
+      padding: 8px;
       background: #f0fdf4;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s;
     }
     .checklist-item:hover { background: #dcfce7; }
     .checklist-item input {
-      width: 18px; height: 18px;
+      width: 16px; height: 16px;
       margin-top: 1px;
       cursor: pointer;
       accent-color: #10b981;
@@ -360,7 +375,7 @@
     }
     .checklist-item label {
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.5;
       color: #333;
       flex: 1;
@@ -374,12 +389,12 @@
     /* ===== MUSIC GRID ===== */
     .music-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
     .music-card {
       background: white;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       border: 2px solid #e2e8f0;
       transition: all 0.2s;
@@ -391,34 +406,34 @@
     }
     .music-thumb {
       width: 100%;
-      height: 120px;
+      height: 100px;
       background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 40px;
+      font-size: 36px;
     }
-    .music-content { padding: 12px; }
+    .music-content { padding: 10px; }
     .music-content h4 {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       color: #0ea5e9;
       margin-bottom: 4px;
     }
     .music-content p {
-      font-size: 12px;
+      font-size: 11px;
       color: #666;
       line-height: 1.4;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .music-btn {
       width: 100%;
-      padding: 9px;
+      padding: 8px;
       background: #0ea5e9;
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 12px;
+      border-radius: 6px;
+      font-size: 11px;
       font-weight: 900;
       cursor: pointer;
       transition: all 0.2s;
@@ -431,20 +446,20 @@
     /* ===== TECHNIQUE LIST ===== */
     .technique-item {
       background: white;
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 10px;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 8px;
       border-left: 4px solid #10b981;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .technique-item h4 {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 900;
       color: #10b981;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .technique-item p {
-      font-size: 13px;
+      font-size: 12px;
       color: #555;
       line-height: 1.5;
       margin: 0;
@@ -452,11 +467,11 @@
 
     /* ===== ALERT BOX ===== */
     .alert {
-      padding: 14px;
-      border-radius: 10px;
-      font-size: 13px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
       line-height: 1.6;
-      margin: 14px 0;
+      margin: 12px 0;
       border-left: 4px solid;
     }
     .alert--success { background: #f0fdf4; border-left-color: #10b981; color: #166534; }
@@ -467,123 +482,128 @@
     .footer {
       background: white;
       border-top: 1px solid #e2e8f0;
-      padding: 20px;
+      padding: 16px;
       text-align: center;
-      font-size: 12px;
+      font-size: 11px;
       color: #666;
-      margin-top: 40px;
+      margin-top: 30px;
     }
     .footer p { margin: 4px 0; }
     .footer a { color: #0ea5e9; text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
-
-    /* ===== MOBILE ===== */
-    @media (max-width: 768px) {
-      .header { padding: calc(16px + env(safe-area-inset-top)) 16px 12px; }
-      .header h1 { font-size: 24px; }
-
-      .emergency-buttons { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .personal-buttons { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-      .content { padding: 0 16px 30px; }
-      .music-grid { grid-template-columns: 1fr; }
-      .breathing-circle { width: 120px; height: 120px; font-size: 13px; }
-    }
   </style>
 </head>
 
 <body>
-  <!-- STICKY HEADER + EMERGENCY -->
-  <div class="header" id="header">
+  <!-- HEADER -->
+  <div class="header">
     <h1>🧠 Panik-Hilfe</h1>
     <p><strong>Du bist nicht allein. Es gibt Hilfe.</strong></p>
 
-    <!-- Emergency: direkt (ohne Confirm) -->
-    <div class="emergency-buttons" aria-label="Notruf-Buttons">
-      <a class="emergency-btn" href="tel:112"><span class="number">112</span>Notfall</a>
-      <a class="emergency-btn" href="tel:110"><span class="number">110</span>Polizei</a>
+    <!-- 1. EMERGENCY NUMBERS (COLLAPSIBLE) -->
+    <div class="collapsible-section">
+      <div class="section-header" onclick="toggleSection('emergency')">
+        <div class="section-title">🚨 Notfall-Nummern</div>
+        <div class="section-toggle" id="emergencyToggle">▼</div>
+      </div>
+      <div class="section-content" id="emergencyContent">
+        <div class="emergency-buttons">
+          <a class="emergency-btn" href="tel:112"><span class="number">112</span>Notfall</a>
+          <a class="emergency-btn" href="tel:116117"><span class="number">116 117</span>Ärztl. Dienst</a>
+          <a class="emergency-btn" href="tel:116123"><span class="number">116 123</span>Seelsorge</a>
+        </div>
+      </div>
     </div>
 
-    <!-- MEDICATION SECTION -->
-    <div class="medication-card">
-      <div class="medication-title">💊 Deine Medikamente (für Notfall-Ärzte)</div>
-      <p class="medication-note">
-        Trage deine wichtigsten Medikamente hier ein. Im Notfall kann ein Arzt schneller und sicherer helfen.
-        Diese Daten bleiben nur auf diesem Gerät (lokaler Speicher).
-      </p>
-      <input
-        id="medicationOwner"
-        class="medication-input"
-        type="text"
-        placeholder="Name / Geburtsdatum (optional, z.B. Maria, 1958)"
-      />
+    <!-- 2. MEDICATION (COLLAPSIBLE) -->
+    <div class="collapsible-section">
+      <div class="section-header" onclick="toggleSection('medication')">
+        <div class="section-title">💊 Deine Medikamente</div>
+        <div class="section-toggle" id="medicationToggle">▼</div>
+      </div>
+      <div class="section-content" id="medicationContent">
+        <p class="medication-note">
+          Trage deine Medikamente ein. Im Notfall kann ein Arzt schneller helfen. Daten bleiben nur auf diesem Gerät.
+        </p>
+        <input
+          id="medicationOwner"
+          class="medication-input"
+          type="text"
+          placeholder="Name / Geburtsdatum (z.B. Maria, 1958)"
+        />
 
-      <table class="medication-table">
-        <thead>
-          <tr>
-            <th>Medikament</th>
-            <th>mg</th>
-            <th>Dauer</th>
-            <th>Grund</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- 5 Zeilen -->
-          <tr>
-            <td><input data-med-row="1" data-med-col="name"  type="text" placeholder="z.B. Citalopram" /></td>
-            <td><input data-med-row="1" data-med-col="mg"    type="text" placeholder="20" /></td>
-            <td><input data-med-row="1" data-med-col="time"  type="text" placeholder="seit 2022" /></td>
-            <td><input data-med-row="1" data-med-col="reason" type="text" placeholder="Angst/Depression" /></td>
-          </tr>
-          <tr>
-            <td><input data-med-row="2" data-med-col="name"  type="text" /></td>
-            <td><input data-med-row="2" data-med-col="mg"    type="text" /></td>
-            <td><input data-med-row="2" data-med-col="time"  type="text" /></td>
-            <td><input data-med-row="2" data-med-col="reason" type="text" /></td>
-          </tr>
-          <tr>
-            <td><input data-med-row="3" data-med-col="name"  type="text" /></td>
-            <td><input data-med-row="3" data-med-col="mg"    type="text" /></td>
-            <td><input data-med-row="3" data-med-col="time"  type="text" /></td>
-            <td><input data-med-row="3" data-med-col="reason" type="text" /></td>
-          </tr>
-          <tr>
-            <td><input data-med-row="4" data-med-col="name"  type="text" /></td>
-            <td><input data-med-row="4" data-med-col="mg"    type="text" /></td>
-            <td><input data-med-row="4" data-med-col="time"  type="text" /></td>
-            <td><input data-med-row="4" data-med-col="reason" type="text" /></td>
-          </tr>
-          <tr>
-            <td><input data-med-row="5" data-med-col="name"  type="text" /></td>
-            <td><input data-med-row="5" data-med-col="mg"    type="text" /></td>
-            <td><input data-med-row="5" data-med-col="time"  type="text" /></td>
-            <td><input data-med-row="5" data-med-col="reason" type="text" /></td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="medication-table">
+          <thead>
+            <tr>
+              <th>Medikament</th>
+              <th>mg</th>
+              <th>Dauer</th>
+              <th>Grund</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input data-med-row="1" data-med-col="name"  type="text" placeholder="z.B. Citalopram" /></td>
+              <td><input data-med-row="1" data-med-col="mg"    type="text" placeholder="20" /></td>
+              <td><input data-med-row="1" data-med-col="time"  type="text" placeholder="seit 2022" /></td>
+              <td><input data-med-row="1" data-med-col="reason" type="text" placeholder="Angst" /></td>
+            </tr>
+            <tr>
+              <td><input data-med-row="2" data-med-col="name"  type="text" /></td>
+              <td><input data-med-row="2" data-med-col="mg"    type="text" /></td>
+              <td><input data-med-row="2" data-med-col="time"  type="text" /></td>
+              <td><input data-med-row="2" data-med-col="reason" type="text" /></td>
+            </tr>
+            <tr>
+              <td><input data-med-row="3" data-med-col="name"  type="text" /></td>
+              <td><input data-med-row="3" data-med-col="mg"    type="text" /></td>
+              <td><input data-med-row="3" data-med-col="time"  type="text" /></td>
+              <td><input data-med-row="3" data-med-col="reason" type="text" /></td>
+            </tr>
+            <tr>
+              <td><input data-med-row="4" data-med-col="name"  type="text" /></td>
+              <td><input data-med-row="4" data-med-col="mg"    type="text" /></td>
+              <td><input data-med-row="4" data-med-col="time"  type="text" /></td>
+              <td><input data-med-row="4" data-med-col="reason" type="text" /></td>
+            </tr>
+            <tr>
+              <td><input data-med-row="5" data-med-col="name"  type="text" /></td>
+              <td><input data-med-row="5" data-med-col="mg"    type="text" /></td>
+              <td><input data-med-row="5" data-med-col="time"  type="text" /></td>
+              <td><input data-med-row="5" data-med-col="reason" type="text" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- PERSONAL CONTACTS -->
-    <div class="personal-contacts">
-      <div class="personal-label">👨‍👩‍👧‍👦 DEINE VERTRAUTEN (Schnell anrufen)</div>
-      <div class="personal-buttons">
-        <button class="personal-btn" onclick="callContact('017632375497','Malika')">
-          <span class="name">Malika</span><span class="role">(Tochter)</span>
-        </button>
-        <button class="personal-btn" onclick="callContact('017848024370','Yessin')">
-          <span class="name">Yessin</span><span class="role">(Sohn)</span>
-        </button>
-        <button class="personal-btn" onclick="callContact('015228840400','Karim')">
-          <span class="name">Karim</span><span class="role">(Sohn)</span>
-        </button>
-        <button class="personal-btn" onclick="callContact('017624300762','Sascha')">
-          <span class="name">Sascha</span><span class="role">(Partner)</span>
-        </button>
+    <!-- 3. PERSONAL CONTACTS (COLLAPSIBLE) -->
+    <div class="collapsible-section">
+      <div class="section-header" onclick="toggleSection('contacts')">
+        <div class="section-title">👨‍👩‍👧‍👦 Deine Vertrauten</div>
+        <div class="section-toggle" id="contactsToggle">▼</div>
+      </div>
+      <div class="section-content" id="contactsContent">
+        <div class="personal-buttons">
+          <button class="personal-btn" onclick="callContact('017632375497','Malika')">
+            <span class="name">Malika</span><span class="role">(Tochter)</span>
+          </button>
+          <button class="personal-btn" onclick="callContact('017848024370','Yessin')">
+            <span class="name">Yessin</span><span class="role">(Sohn)</span>
+          </button>
+          <button class="personal-btn" onclick="callContact('015228840400','Karim')">
+            <span class="name">Karim</span><span class="role">(Sohn)</span>
+          </button>
+          <button class="personal-btn" onclick="callContact('017624300762','Sascha')">
+            <span class="name">Sascha</span><span class="role">(Partner)</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- QUICK NAV -->
-  <div class="quick-nav" id="quickNav">
+  <div class="quick-nav">
     <button class="nav-btn active" data-target="sofort">⚡ Sofort</button>
     <button class="nav-btn" data-target="atmen">💨 Atmen</button>
     <button class="nav-btn" data-target="musik">🎵 Musik</button>
@@ -591,56 +611,221 @@
     <button class="nav-btn" data-target="langfristig">💚 Langfristig</button>
   </div>
 
-  <!-- MAIN CONTENT (UNVERÄNDERT LASSEN ODER NACH BEDARF ANPASSEN) -->
-  <!-- ... hier dein bisheriger Content (Sofort, Atmen, Musik, Techniken, Langfristig, Footer, Script) ... -->
+  <!-- MAIN CONTENT -->
+  <div class="content">
+
+    <!-- 1. SOFORT-MASSNAHMEN -->
+    <div class="section-group" id="sofort">
+      <div class="section-title-main">⚡ Sofort-Maßnahmen (2 Minuten)</div>
+
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="check1">
+          <label for="check1"><strong>Sicher sein:</strong> Setzen/hinlegen (kein Sturz)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check2">
+          <label for="check2"><strong>Atmen:</strong> Ein (4 Sek), Aus (6 Sek)</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check3">
+          <label for="check3"><strong>Kontakt:</strong> Jemanden anrufen oder 116 123</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check4">
+          <label for="check4"><strong>Grounding:</strong> 5 sehen, 4 anfassen, 3 hören</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check5">
+          <label for="check5"><strong>Kaltwasser:</strong> Gesicht waschen (beruhigt)</label>
+        </div>
+      </div>
+
+      <div class="alert alert--calm">
+        <strong>⏱️ Wichtig:</strong> Panikattacken dauern 5–20 Min. Du wirst wieder normal atmen. Es ist sicher.
+      </div>
+    </div>
+
+    <!-- 2. ATEMTECHNIKEN -->
+    <div class="section-group" id="atmen">
+      <div class="section-title-main">💨 Atemtechniken</div>
+
+      <div class="breathing-selector">
+        <button class="breathing-option active" data-technique="478">
+          <strong>4-7-8</strong><br><small>Entspannung</small>
+        </button>
+        <button class="breathing-option" data-technique="box">
+          <strong>Box</strong><br><small>Akut</small>
+        </button>
+        <button class="breathing-option" data-technique="kohaerence">
+          <strong>Kohärenz</strong><br><small>5-5</small>
+        </button>
+      </div>
+
+      <div class="breathing-container">
+        <div class="breathing-circle" id="breathingCircle">
+          Einatmen<br><span id="breathingTime">(4 Sek)</span>
+        </div>
+
+        <p class="breathing-instruction" id="instruction">
+          Folge dem Rhythmus: <strong>Ein (4) → Halten (7) → Aus (8)</strong>
+        </p>
+
+        <div class="breathing-controls">
+          <button class="breathing-btn-small" id="pauseBtn">⏸ Pause</button>
+          <button class="breathing-btn-small" id="resetBtn">🔄 Neu</button>
+          <button class="breathing-btn-small" id="vibeBtn">📳 Aus</button>
+        </div>
+      </div>
+
+      <div class="card card--blue">
+        <h3>📍 Wann welche Technik?</h3>
+        <p>
+          <strong>Box:</strong> Schnell bei akuter Panik<br>
+          <strong>4-7-8:</strong> Tiefe Entspannung<br>
+          <strong>Kohärenz:</strong> Tägliche Balance
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. MUSIK -->
+    <div class="section-group" id="musik">
+      <div class="section-title-main">🎵 Entspannungsmusik</div>
+
+      <div class="music-grid">
+        <div class="music-card">
+          <div class="music-thumb">🏝️</div>
+          <div class="music-content">
+            <h4>Beruhige deine Gedanken</h4>
+            <p>4+ Stunden Beach-Entspannung</p>
+            <a href="https://www.youtube.com/watch?v=kRakh3ifEMQ" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
+          </div>
+        </div>
+
+        <div class="music-card">
+          <div class="music-thumb">💧</div>
+          <div class="music-content">
+            <h4>Wasserfall – 4K</h4>
+            <p>2+ Stunden Naturgeräusche</p>
+            <a href="https://www.youtube.com/watch?v=g_3cIWgZ5C8" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
+          </div>
+        </div>
+
+        <div class="music-card">
+          <div class="music-thumb">🌙</div>
+          <div class="music-content">
+            <h4>Meditation zum Einschlafen</h4>
+            <p>1,5+ Stunden</p>
+            <a href="https://www.youtube.com/watch?v=f9yLPqHFjSU" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. WEITERE TECHNIKEN -->
+    <div class="section-group" id="techniken">
+      <div class="section-title-main">🧠 Weitere Techniken</div>
+
+      <div class="technique-item">
+        <h4>🎯 5-4-3-2-1 Grounding</h4>
+        <p>5 sehen · 4 fühlen · 3 hören · 2 riechen · 1 schmecken → zurück ins Jetzt</p>
+      </div>
+
+      <div class="technique-item">
+        <h4>💪 Progressive Muskelentspannung</h4>
+        <p>5 Sek anspannen → 10 Sek lösen. Von Füßen bis Kopf.</p>
+      </div>
+
+      <div class="technique-item">
+        <h4>🚶 Bewegung</h4>
+        <p>Spazieren, Dehnen, Treppe. Baut Adrenalin ab.</p>
+      </div>
+
+      <div class="technique-item">
+        <h4>❄️ Kaltwasser</h4>
+        <p>Kurz kaltes Wasser ins Gesicht – aktiviert Vagusnerv.</p>
+      </div>
+    </div>
+
+    <!-- 5. LANGFRISTIG -->
+    <div class="section-group" id="langfristig">
+      <div class="section-title-main">💚 Langfristige Unterstützung</div>
+
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="long1">
+          <label for="long1"><strong>Therapie:</strong> KVT oder Schema</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="long2">
+          <label for="long2"><strong>Hausarzt:</strong> Abklärung + Plan</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="long3">
+          <label for="long3"><strong>Routine:</strong> Schlaf, Essen, Bewegung</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="long4">
+          <label for="long4"><strong>Tagebuch:</strong> Auslöser notieren</label>
+        </div>
+      </div>
+
+      <div class="alert alert--warning">
+        <strong>Für Angehörige:</strong> Nicht diskutieren. Sag: „Ich bin da. Atme mit mir."
+      </div>
+    </div>
+
+    <div class="card card--blue-light">
+      <h3>ℹ️ Wann 112 anrufen?</h3>
+      <p><strong>Sofort bei:</strong> Gedanken dich zu verletzen • Brustschmerzen + Atemnot • Verwirrtheit</p>
+      <p style="margin-top:6px;"><strong>Auch okay:</strong> wenn unsicher. Lieber einmal zu viel.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p><strong>Für deine Mum</strong> – Mit ❤️ von Karim</p>
+    <p>Ersetzt keine professionelle Hilfe. <strong>Notfall: 112 · Seelsorge: 116 123</strong></p>
+  </div>
 
   <script>
-    // ===== Sticky QuickNav Offset =====
-    const headerEl = document.getElementById('header');
-    const quickNavEl = document.getElementById('quickNav');
-
-    function updateStickyOffset() {
-      const h = headerEl.offsetHeight || 0;
-      quickNavEl.style.top = h + 'px';
-    }
-    window.addEventListener('resize', updateStickyOffset);
-    window.addEventListener('load', updateStickyOffset);
-    updateStickyOffset();
-
-    // ===== Quick Nav Buttons =====
-    function setActiveNav(targetId) {
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      const btn = document.querySelector(\`.nav-btn[data-target="\${targetId}"]\`);
-      if (btn) btn.classList.add('active');
+    // ===== Toggle Sections =====
+    function toggleSection(sectionId) {
+      const content = document.getElementById(sectionId + 'Content');
+      const toggle = document.getElementById(sectionId + 'Toggle');
+      
+      content.classList.toggle('open');
+      toggle.classList.toggle('open');
     }
 
+    // ===== Quick Nav =====
     document.querySelectorAll('.nav-btn').forEach(btn => {
       btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
         const id = btn.getAttribute('data-target');
         const el = document.getElementById(id);
-        if (el) {
-          setActiveNav(id);
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
-    // ===== Telefon-Logik für Kontakte =====
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
+    // ===== Call Function =====
     function callContact(number, name) {
-      const clean = (number || '').replace(/[^\d+]/g, '');
+      const clean = number.replace(/[^\d+]/g, '');
       if (!clean) return;
-
+      
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
       if (isMobile) {
-        const ok = confirm(\`📞 \${name} anrufen?\n\n\${clean}\`);
-        if (ok) window.location.href = \`tel:\${clean}\`;
+        if (confirm(`📞 ${name} anrufen?\n\n${clean}`)) {
+          window.location.href = `tel:${clean}`;
+        }
       } else {
-        alert(\`📞 Bitte anrufen: \${name} – \${clean}\`);
+        alert(`📞 Bitte anrufen: ${name} – ${clean}`);
       }
     }
 
-    // ===== Medication Local Storage =====
+    // ===== Medication Storage =====
     const MED_OWNER_KEY = 'med_owner';
     const MED_ROWS_KEY = 'med_rows';
 
@@ -661,7 +846,7 @@
           }
         });
       } catch (e) {
-        console.error('Medication load error', e);
+        console.error('Load error', e);
       }
     }
 
@@ -685,6 +870,137 @@
     });
 
     loadMedication();
+
+    // ===== Breathing System =====
+    const breathingCircle = document.getElementById('breathingCircle');
+    const instruction = document.getElementById('instruction');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const vibeBtn = document.getElementById('vibeBtn');
+
+    let currentTechnique = '478';
+    let isBreathingActive = true;
+    let timer = null;
+    let vibe = false;
+
+    const breathingTechniques = {
+      '478': {
+        phases: [
+          { label: 'Einatmen', sec: 4, action: 'inhale' },
+          { label: 'Halten',   sec: 7, action: 'hold'   },
+          { label: 'Ausatmen', sec: 8, action: 'exhale' }
+        ],
+        info: 'Ein (4) → Halten (7) → Aus (8)'
+      },
+      'box': {
+        phases: [
+          { label: 'Einatmen', sec: 4, action: 'inhale' },
+          { label: 'Halten',   sec: 4, action: 'hold'   },
+          { label: 'Ausatmen', sec: 4, action: 'exhale' },
+          { label: 'Halten',   sec: 4, action: 'hold'   }
+        ],
+        info: 'Box: 4-4-4-4'
+      },
+      'kohaerence': {
+        phases: [
+          { label: 'Einatmen', sec: 5, action: 'inhale' },
+          { label: 'Ausatmen', sec: 5, action: 'exhale' }
+        ],
+        info: 'Kohärenz: 5-5'
+      }
+    };
+
+    function vibratePing() {
+      if (vibe && navigator.vibrate) navigator.vibrate([35]);
+    }
+
+    function setCircle(label, sec, action) {
+      breathingCircle.innerHTML = `${label}<br><span id="breathingTime">(${sec} Sek)</span>`;
+      instruction.innerHTML = `Folge dem Rhythmus: <strong>${breathingTechniques[currentTechnique].info}</strong>`;
+
+      if (action === 'inhale') {
+        breathingCircle.style.transform = 'scale(1.22)';
+      } else if (action === 'exhale') {
+        breathingCircle.style.transform = 'scale(1)';
+      }
+    }
+
+    function clearTimer() {
+      if (timer) { clearTimeout(timer); timer = null; }
+    }
+
+    function runCycle() {
+      if (!isBreathingActive) return;
+
+      const phases = breathingTechniques[currentTechnique].phases;
+      let i = 0;
+
+      const next = () => {
+        if (!isBreathingActive) return;
+
+        const p = phases[i];
+        setCircle(p.label, p.sec, p.action);
+        vibratePing();
+
+        clearTimer();
+        timer = setTimeout(() => {
+          i = (i + 1) % phases.length;
+          next();
+        }, p.sec * 1000);
+      };
+
+      next();
+    }
+
+    function pauseBreathing() {
+      isBreathingActive = !isBreathingActive;
+      if (isBreathingActive) {
+        pauseBtn.textContent = '⏸ Pause';
+        runCycle();
+      } else {
+        pauseBtn.textContent = '▶ Play';
+        clearTimer();
+      }
+    }
+
+    function resetBreathing() {
+      isBreathingActive = true;
+      pauseBtn.textContent = '⏸ Pause';
+      clearTimer();
+      breathingCircle.style.transform = 'scale(1)';
+      runCycle();
+    }
+
+    document.querySelectorAll('.breathing-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.breathing-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTechnique = btn.getAttribute('data-technique');
+        resetBreathing();
+      });
+    });
+
+    breathingCircle.addEventListener('click', pauseBreathing);
+    pauseBtn.addEventListener('click', pauseBreathing);
+    resetBtn.addEventListener('click', resetBreathing);
+
+    vibeBtn.addEventListener('click', () => {
+      vibe = !vibe;
+      vibeBtn.textContent = vibe ? '📳 An' : '📳 Aus';
+      vibratePing();
+    });
+
+    resetBreathing();
+
+    // ===== Checklist Persistence =====
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      const id = checkbox.id;
+      if (localStorage.getItem(id)) checkbox.checked = true;
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) localStorage.setItem(id, 'true');
+        else localStorage.removeItem(id);
+      });
+    });
   </script>
 </body>
 </html>
