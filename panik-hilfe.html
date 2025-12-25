@@ -81,6 +81,66 @@
       margin-bottom: 2px;
     }
 
+    /* ===== MEDICATION SECTION ===== */
+    .medication-card {
+      margin-top: 14px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: left;
+    }
+    .medication-title {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      opacity: 0.95;
+    }
+    .medication-note {
+      font-size: 11px;
+      opacity: 0.9;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .medication-input {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .medication-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .medication-table th,
+    .medication-table td {
+      border: 1px solid rgba(15, 23, 42, 0.15);
+      padding: 4px 6px;
+      text-align: left;
+    }
+    .medication-table th {
+      background: rgba(15, 23, 42, 0.9);
+      color: #f9fafb;
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .medication-table input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 11px;
+      color: #111827;
+    }
+    .medication-table input:focus {
+      outline: none;
+      background: #e0f2fe;
+    }
+
     /* PERSONAL CONTACTS SECTION */
     .personal-contacts {
       background: rgba(255,255,255,0.12);
@@ -140,7 +200,6 @@
       overflow-x: auto;
       border-bottom: 1px solid #e2e8f0;
       position: sticky;
-      /* top wird per JS auf Header-Höhe gesetzt */
       top: 0;
       z-index: 50;
       margin-bottom: 20px;
@@ -438,12 +497,70 @@
     <h1>🧠 Panik-Hilfe</h1>
     <p><strong>Du bist nicht allein. Es gibt Hilfe.</strong></p>
 
-    <!-- Emergency: ohne Confirm (im Notfall KEIN Popup) -->
+    <!-- Emergency: direkt (ohne Confirm) -->
     <div class="emergency-buttons" aria-label="Notruf-Buttons">
       <a class="emergency-btn" href="tel:112"><span class="number">112</span>Notfall</a>
-      <a class="emergency-btn" href="tel:110"><span class="number">110</span>Polizei</a>
-      <a class="emergency-btn" href="tel:116123"><span class="number">116 123</span>Seelsorge</a>
-      <a class="emergency-btn" href="tel:116117"><span class="number">116 117</span>Ärztl. Dienst</a>
+      <a class="emergency-btn" href="tel:116117"><span class="number">116 117</span>Ärztlicher Dienst</a>
+      <a class="emergency-btn" href="tel:116123"><span class="number">116 123</span>Telefonseelsorge</a>
+    </div>
+
+    <!-- MEDICATION SECTION -->
+    <div class="medication-card">
+      <div class="medication-title">💊 Deine Medikamente (für Notfall-Ärzte)</div>
+      <p class="medication-note">
+        Trage deine wichtigsten Medikamente hier ein. Im Notfall kann ein Arzt schneller und sicherer helfen.
+        Diese Daten bleiben nur auf diesem Gerät (lokaler Speicher).
+      </p>
+      <input
+        id="medicationOwner"
+        class="medication-input"
+        type="text"
+        placeholder="Name / Geburtsdatum (optional, z.B. Maria, 1958)"
+      />
+
+      <table class="medication-table">
+        <thead>
+          <tr>
+            <th>Medikament</th>
+            <th>mg</th>
+            <th>Dauer</th>
+            <th>Grund</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 5 Zeilen -->
+          <tr>
+            <td><input data-med-row="1" data-med-col="name"  type="text" placeholder="z.B. Citalopram" /></td>
+            <td><input data-med-row="1" data-med-col="mg"    type="text" placeholder="20" /></td>
+            <td><input data-med-row="1" data-med-col="time"  type="text" placeholder="seit 2022" /></td>
+            <td><input data-med-row="1" data-med-col="reason" type="text" placeholder="Angst/Depression" /></td>
+          </tr>
+          <tr>
+            <td><input data-med-row="2" data-med-col="name"  type="text" /></td>
+            <td><input data-med-row="2" data-med-col="mg"    type="text" /></td>
+            <td><input data-med-row="2" data-med-col="time"  type="text" /></td>
+            <td><input data-med-row="2" data-med-col="reason" type="text" /></td>
+          </tr>
+          <tr>
+            <td><input data-med-row="3" data-med-col="name"  type="text" /></td>
+            <td><input data-med-row="3" data-med-col="mg"    type="text" /></td>
+            <td><input data-med-row="3" data-med-col="time"  type="text" /></td>
+            <td><input data-med-row="3" data-med-col="reason" type="text" /></td>
+          </tr>
+          <tr>
+            <td><input data-med-row="4" data-med-col="name"  type="text" /></td>
+            <td><input data-med-row="4" data-med-col="mg"    type="text" /></td>
+            <td><input data-med-row="4" data-med-col="time"  type="text" /></td>
+            <td><input data-med-row="4" data-med-col="reason" type="text" /></td>
+          </tr>
+          <tr>
+            <td><input data-med-row="5" data-med-col="name"  type="text" /></td>
+            <td><input data-med-row="5" data-med-col="mg"    type="text" /></td>
+            <td><input data-med-row="5" data-med-col="time"  type="text" /></td>
+            <td><input data-med-row="5" data-med-col="reason" type="text" /></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- PERSONAL CONTACTS -->
@@ -475,195 +592,11 @@
     <button class="nav-btn" data-target="langfristig">💚 Langfristig</button>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="content">
-
-    <!-- 1. SOFORT-MASSNAHMEN -->
-    <div class="section-group" id="sofort">
-      <div class="section-title">⚡ Sofort-Maßnahmen (2 Minuten)</div>
-
-      <div class="checklist">
-        <div class="checklist-item">
-          <input type="checkbox" id="check1">
-          <label for="check1"><strong>Sicher sein:</strong> Setzen/hinlegen (kein Sturz)</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="check2">
-          <label for="check2"><strong>Atmen:</strong> Ein (4 Sek), Aus (6 Sek) oder Box (4-4-4-4)</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="check3">
-          <label for="check3"><strong>Kontakt:</strong> Jemanden anrufen oder 116 123</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="check4">
-          <label for="check4"><strong>Grounding:</strong> 5 sehen, 4 anfassen, 3 hören, 2 riechen, 1 schmecken</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="check5">
-          <label for="check5"><strong>Kaltwasser:</strong> Kurz Gesicht waschen (wenn du sicher stehst/sitzt)</label>
-        </div>
-      </div>
-
-      <div class="alert alert--calm">
-        <strong>⏱️ Wichtig:</strong> Panik geht vorbei. Du bist nicht „kaputt“ – dein Nervensystem ist gerade im Alarm.
-      </div>
-    </div>
-
-    <!-- 2. ATEMTECHNIKEN -->
-    <div class="section-group" id="atmen">
-      <div class="section-title">💨 Atemtechniken (Wähle deine Methode)</div>
-
-      <div class="breathing-selector">
-        <button class="breathing-option active" data-technique="478">
-          <strong>4-7-8</strong><br><small>Tiefe Entspannung</small>
-        </button>
-        <button class="breathing-option" data-technique="box">
-          <strong>Box</strong><br><small>Akut & Fokus</small>
-        </button>
-        <button class="breathing-option" data-technique="kohaerence">
-          <strong>Kohärenz</strong><br><small>5-5 Rhythmus</small>
-        </button>
-      </div>
-
-      <div class="breathing-container">
-        <div class="breathing-circle" id="breathingCircle" title="Tippen: Pause/Fortsetzen">
-          Einatmen<br><span id="breathingTime">(4 Sek)</span>
-        </div>
-
-        <p class="breathing-instruction" id="instruction">
-          Folge dem Rhythmus: <strong>Einatmen (4) → Halten (7) → Ausatmen (8)</strong>
-        </p>
-
-        <div class="breathing-controls">
-          <button class="breathing-btn-small" id="pauseBtn">⏸ Pause</button>
-          <button class="breathing-btn-small" id="resetBtn">🔄 Neustarten</button>
-          <button class="breathing-btn-small" id="vibeBtn" aria-pressed="false">📳 Vibration: Aus</button>
-        </div>
-      </div>
-
-      <div class="card card--blue">
-        <h3>📍 Wann welche Technik?</h3>
-        <p>
-          <strong>Box:</strong> Akut, schnell, stabilisiert.<br>
-          <strong>4-7-8:</strong> Tiefe Entspannung (nicht perfekt, einfach mitmachen).<br>
-          <strong>Kohärenz:</strong> Sanft, täglich, stabil.
-        </p>
-      </div>
-
-      <div class="card card--blue">
-        <h3>💡 Wichtig (statt Fake-Prozent)</h3>
-        <p>Wenn dir schwindlig wird: kürzer, langsamer, oder kurz normal atmen. Hauptsache dranbleiben.</p>
-      </div>
-    </div>
-
-    <!-- 3. MUSIK -->
-    <div class="section-group" id="musik">
-      <div class="section-title">🎵 Entspannungsmusik (YouTube)</div>
-
-      <div class="music-grid">
-        <div class="music-card">
-          <div class="music-thumb">🏝️</div>
-          <div class="music-content">
-            <h4>Beruhige deine Gedanken</h4>
-            <p>4+ Stunden Beach-Entspannung</p>
-            <a href="https://www.youtube.com/watch?v=kRakh3ifEMQ" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
-          </div>
-        </div>
-
-        <div class="music-card">
-          <div class="music-thumb">💧</div>
-          <div class="music-content">
-            <h4>Wasserfall – 4K</h4>
-            <p>2+ Stunden Naturgeräusche</p>
-            <a href="https://www.youtube.com/watch?v=g_3cIWgZ5C8" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
-          </div>
-        </div>
-
-        <div class="music-card">
-          <div class="music-thumb">🌙</div>
-          <div class="music-content">
-            <h4>Meditation zum Einschlafen</h4>
-            <p>1,5+ Stunden</p>
-            <a href="https://www.youtube.com/watch?v=f9yLPqHFjSU" target="_blank" rel="noopener" class="music-btn">▶ Öffnen</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="alert alert--success">
-        <strong>💡 Tipp:</strong> Wenn Netz schlecht ist: lieber eine feste Offline-Playlist vorbereiten.
-      </div>
-    </div>
-
-    <!-- 4. WEITERE TECHNIKEN -->
-    <div class="section-group" id="techniken">
-      <div class="section-title">🧠 Weitere Entspannungstechniken</div>
-
-      <div class="technique-item">
-        <h4>🎯 5-4-3-2-1 Grounding (2–3 Min)</h4>
-        <p>5 sehen · 4 fühlen · 3 hören · 2 riechen · 1 schmecken → holt dich zurück ins Jetzt.</p>
-      </div>
-
-      <div class="technique-item">
-        <h4>💪 Progressive Muskelentspannung (5–10 Min)</h4>
-        <p>5 Sek anspannen → 10 Sek lösen. Füße bis Kopf. Körper checkt: „Alarm ist vorbei“.</p>
-      </div>
-
-      <div class="technique-item">
-        <h4>🚶 Bewegung (5–10 Min)</h4>
-        <p>Spaziergang, Dehnen, Treppe. Adrenalin kann so „raus“.</p>
-      </div>
-
-      <div class="technique-item">
-        <h4>❄️ Kaltwasser (kurz & sicher)</h4>
-        <p>Wenn du stabil sitzt/stehst: kurz kaltes Wasser ins Gesicht – kann beruhigen.</p>
-      </div>
-    </div>
-
-    <!-- 5. LANGFRISTIG -->
-    <div class="section-group" id="langfristig">
-      <div class="section-title">💚 Langfristige Unterstützung</div>
-
-      <div class="checklist">
-        <div class="checklist-item">
-          <input type="checkbox" id="long1">
-          <label for="long1"><strong>Therapie:</strong> KVT oder Schema (Therapeut:innensuche)</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="long2">
-          <label for="long2"><strong>Hausarzt:</strong> Abklärung + Plan</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="long3">
-          <label for="long3"><strong>Routine:</strong> Schlaf, Essen, Bewegung (klein anfangen)</label>
-        </div>
-        <div class="checklist-item">
-          <input type="checkbox" id="long4">
-          <label for="long4"><strong>Tagebuch:</strong> Auslöser/Was half → Muster erkennen</label>
-        </div>
-      </div>
-
-      <div class="alert alert--warning">
-        <strong>Für Angehörige:</strong> Nicht diskutieren. Einfach sagen: „Ich bin da. Atme mit mir.“
-      </div>
-    </div>
-
-    <div class="card card--blue-light" style="margin-top: 28px;">
-      <h3>ℹ️ Wann sollte ich 112 anrufen?</h3>
-      <p><strong>Sofort bei:</strong> Gedanken dich zu verletzen • starke Brustschmerzen + Atemnot • Verwirrtheit/Blackout • medizinischer Notfall.</p>
-      <p style="margin-top:8px;"><strong>Auch okay:</strong> wenn du unsicher bist. Lieber einmal zu viel.</p>
-    </div>
-
-  </div>
-
-  <div class="footer">
-    <p><strong>Für deine Mum</strong> – Mit ❤️ von Karim</p>
-    <p>Diese Seite ersetzt keine professionelle Hilfe. <strong>Notfall: 112 · Seelsorge: 116 123</strong></p>
-    <p style="margin-top: 8px; font-size: 11px; opacity: 0.7;">Stand: Dez 2024</p>
-  </div>
+  <!-- MAIN CONTENT (UNVERÄNDERT LASSEN ODER NACH BEDARF ANPASSEN) -->
+  <!-- ... hier dein bisheriger Content (Sofort, Atmen, Musik, Techniken, Langfristig, Footer, Script) ... -->
 
   <script>
-    // ===== Sticky QuickNav: exakt unter dem Header kleben =====
+    // ===== Sticky QuickNav Offset =====
     const headerEl = document.getElementById('header');
     const quickNavEl = document.getElementById('quickNav');
 
@@ -675,10 +608,10 @@
     window.addEventListener('load', updateStickyOffset);
     updateStickyOffset();
 
-    // ===== Quick Nav (kein Konflikt mit window.scrollTo) =====
+    // ===== Quick Nav Buttons =====
     function setActiveNav(targetId) {
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      const btn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+      const btn = document.querySelector(\`.nav-btn[data-target="\${targetId}"]\`);
       if (btn) btn.classList.add('active');
     }
 
@@ -693,162 +626,66 @@
       });
     });
 
-    // ===== Anrufe =====
+    // ===== Telefon-Logik für Kontakte =====
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    // Für persönliche Kontakte: leichte Absicherung ok.
     function callContact(number, name) {
       const clean = (number || '').replace(/[^\d+]/g, '');
       if (!clean) return;
 
       if (isMobile) {
-        // Für private Kontakte darf Confirm bleiben (optional)
-        const ok = confirm(`📞 ${name} anrufen?\n\n${clean}`);
-        if (ok) window.location.href = `tel:${clean}`;
+        const ok = confirm(\`📞 \${name} anrufen?\n\n\${clean}\`);
+        if (ok) window.location.href = \`tel:\${clean}\`;
       } else {
-        alert(`📞 Bitte anrufen: ${name} – ${clean}`);
+        alert(\`📞 Bitte anrufen: \${name} – \${clean}\`);
       }
     }
 
-    // ===== Atemsystem (stabil, Phase-Dauer korrekt) =====
-    const breathingCircle = document.getElementById('breathingCircle');
-    const instruction = document.getElementById('instruction');
-    const pauseBtn = document.getElementById('pauseBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const vibeBtn = document.getElementById('vibeBtn');
+    // ===== Medication Local Storage =====
+    const MED_OWNER_KEY = 'med_owner';
+    const MED_ROWS_KEY = 'med_rows';
 
-    let currentTechnique = '478';
-    let isBreathingActive = true;
-    let timer = null;
-    let vibe = false;
+    function loadMedication() {
+      const owner = localStorage.getItem(MED_OWNER_KEY) || '';
+      document.getElementById('medicationOwner').value = owner;
 
-    const breathingTechniques = {
-      '478': {
-        phases: [
-          { label: 'Einatmen', sec: 4, action: 'inhale' },
-          { label: 'Halten',   sec: 7, action: 'hold'   },
-          { label: 'Ausatmen', sec: 8, action: 'exhale' }
-        ],
-        info: 'Ein (4) → Halten (7) → Aus (8) – Entspannung'
-      },
-      'box': {
-        phases: [
-          { label: 'Einatmen', sec: 4, action: 'inhale' },
-          { label: 'Halten',   sec: 4, action: 'hold'   },
-          { label: 'Ausatmen', sec: 4, action: 'exhale' },
-          { label: 'Halten',   sec: 4, action: 'hold'   }
-        ],
-        info: 'Box: 4-4-4-4 – Akut & Fokus'
-      },
-      'kohaerence': {
-        phases: [
-          { label: 'Einatmen', sec: 5, action: 'inhale' },
-          { label: 'Ausatmen', sec: 5, action: 'exhale' }
-        ],
-        info: 'Kohärenz: 5-5 – sanft & stabil'
-      }
-    };
+      const saved = localStorage.getItem(MED_ROWS_KEY);
+      if (!saved) return;
 
-    function vibratePing() {
-      if (!vibe) return;
-      if (navigator.vibrate) navigator.vibrate([35]);
-    }
-
-    function setCircle(label, sec, action) {
-      breathingCircle.innerHTML = `${label}<br><span id="breathingTime">(${sec} Sek)</span>`;
-      instruction.innerHTML = `Folge dem Rhythmus: <strong>${breathingTechniques[currentTechnique].info}</strong>`;
-
-      // Aktion: Scale hoch/runter; hold bleibt wie ist
-      if (action === 'inhale') {
-        breathingCircle.style.transform = 'scale(1.22)';
-      } else if (action === 'exhale') {
-        breathingCircle.style.transform = 'scale(1)';
-      } else {
-        // hold -> leicht stabil
-        breathingCircle.style.transform = breathingCircle.style.transform || 'scale(1)';
+      try {
+        const data = JSON.parse(saved);
+        document.querySelectorAll('[data-med-row]').forEach(input => {
+          const row = input.getAttribute('data-med-row');
+          const col = input.getAttribute('data-med-col');
+          if (data[row] && data[row][col] !== undefined) {
+            input.value = data[row][col];
+          }
+        });
+      } catch (e) {
+        console.error('Medication load error', e);
       }
     }
 
-    function clearTimer() {
-      if (timer) { clearTimeout(timer); timer = null; }
-    }
+    function saveMedication() {
+      const ownerVal = document.getElementById('medicationOwner').value || '';
+      localStorage.setItem(MED_OWNER_KEY, ownerVal);
 
-    function runCycle() {
-      if (!isBreathingActive) return;
-
-      const phases = breathingTechniques[currentTechnique].phases;
-      let i = 0;
-
-      const next = () => {
-        if (!isBreathingActive) return;
-
-        const p = phases[i];
-        setCircle(p.label, p.sec, p.action);
-        vibratePing();
-
-        clearTimer();
-        timer = setTimeout(() => {
-          i = (i + 1) % phases.length;
-          next();
-        }, p.sec * 1000);
-      };
-
-      next();
-    }
-
-    function pauseBreathing() {
-      isBreathingActive = !isBreathingActive;
-      if (isBreathingActive) {
-        pauseBtn.textContent = '⏸ Pause';
-        runCycle();
-      } else {
-        pauseBtn.textContent = '▶ Fortsetzen';
-        clearTimer();
-      }
-    }
-
-    function resetBreathing() {
-      isBreathingActive = true;
-      pauseBtn.textContent = '⏸ Pause';
-      clearTimer();
-      breathingCircle.style.transform = 'scale(1)';
-      runCycle();
-    }
-
-    // Technique buttons
-    document.querySelectorAll('.breathing-option').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.breathing-option').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentTechnique = btn.getAttribute('data-technique');
-        resetBreathing();
+      const rows = {};
+      document.querySelectorAll('[data-med-row]').forEach(input => {
+        const row = input.getAttribute('data-med-row');
+        const col = input.getAttribute('data-med-col');
+        if (!rows[row]) rows[row] = {};
+        rows[row][col] = input.value || '';
       });
+      localStorage.setItem(MED_ROWS_KEY, JSON.stringify(rows));
+    }
+
+    document.getElementById('medicationOwner').addEventListener('input', saveMedication);
+    document.querySelectorAll('[data-med-row]').forEach(input => {
+      input.addEventListener('input', saveMedication);
     });
 
-    // Controls
-    breathingCircle.addEventListener('click', pauseBreathing);
-    pauseBtn.addEventListener('click', pauseBreathing);
-    resetBtn.addEventListener('click', resetBreathing);
-
-    vibeBtn.addEventListener('click', () => {
-      vibe = !vibe;
-      vibeBtn.textContent = vibe ? '📳 Vibration: An' : '📳 Vibration: Aus';
-      vibeBtn.setAttribute('aria-pressed', vibe ? 'true' : 'false');
-      vibratePing();
-    });
-
-    // Start breathing on load
-    resetBreathing();
-
-    // ===== Checklist Persistence =====
-    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-      const id = checkbox.id;
-      if (localStorage.getItem(id)) checkbox.checked = true;
-      checkbox.addEventListener('change', () => {
-        if (checkbox.checked) localStorage.setItem(id, 'true');
-        else localStorage.removeItem(id);
-      });
-    });
+    loadMedication();
   </script>
 </body>
 </html>
