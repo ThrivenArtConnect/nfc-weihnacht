@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiCKaRiM NEXUS | Control Center</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #111;
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+            --accent: #00ff41; /* Cyberpunk Green */
+            --accent-dim: rgba(0, 255, 65, 0.1);
+            --danger: #ff0055;
+            --font-stack: 'Courier New', Courier, monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-stack);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 { font-size: 2rem; text-transform: uppercase; letter-spacing: 2px; }
+        .subtitle { color: var(--accent); font-weight: bold; }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            background: var(--card-bg);
+            border: 1px solid #333;
+            color: var(--accent);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        input[type="text"]:focus { outline: none; border-color: var(--accent); }
+
+        .filter-btn {
+            background: #222;
+            color: var(--text-muted);
+            border: 1px solid #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-dim);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            padding: 20px;
+            position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .tag.suno { color: #f0f; border-color: #f0f; }
+        .tag.tech { color: #0ff; border-color: #0ff; }
+        .tag.content { color: #ff0; border-color: #ff0; }
+        .tag.focus { color: var(--accent); border-color: var(--accent); }
+
+        h3 { font-size: 1.1rem; margin-bottom: 10px; color: #fff; }
+        p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; }
+
+        /* Actions */
+        .actions {
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        a.launch-btn {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.8rem;
+            background: #222;
+            padding: 5px 10px;
+            border: 1px solid #444;
+        }
+        a.launch-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+        /* Checkbox Custom */
+        .status-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .status-check input { display: none; }
+        .checkmark {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #555;
+            display: inline-block;
+            position: relative;
+        }
+        .status-check input:checked + .checkmark { background: var(--accent); border-color: var(--accent); }
+        .status-check input:checked ~ span { color: var(--accent); text-decoration: line-through; }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>SiCKaRiM <span style="color:var(--accent)">//</span> NEXUS</h1>
+        <div class="subtitle">Thriven Art Connect | Module Library</div>
+    </div>
+    <div style="text-align: right; font-size: 0.8rem; color: #666;">
+        SYSTEM: ONLINE<br>
+        LOC: FRANKFURT<br>
+        <span id="clock">--:--</span>
+    </div>
+</header>
+
+<div class="controls">
+    <input type="text" id="searchInput" placeholder="Search modules (e.g., 'Suno', 'NFC', 'Tekk')...">
+</div>
+
+<div class="controls" id="filterContainer">
+    <button class="filter-btn active" data-filter="all">ALL</button>
+    <button class="filter-btn" data-filter="suno">SUNO AI</button>
+    <button class="filter-btn" data-filter="tech">TECH/NFC</button>
+    <button class="filter-btn" data-filter="content">CONTENT</button>
+    <button class="filter-btn" data-filter="focus">FOCUS</button>
+</div>
+
+<div class="grid" id="appGrid">
+    </div>
+
+<footer>
+    <p>GENERATED BY GEMINI FOR SICKARIM | MODE: DETERMINISTIC</p>
+</footer>
+
+<script>
+    // --- DATA ---
+    const apps = [
+        { title: "Tägliches Fokus System", category: "focus", desc: "Motivations-Check & Tagesplanung.", id: "app_focus" },
+        { title: "NFC Automation Suite", category: "tech", desc: "Raspberry Pi PN532 Automation Scripts.", id: "app_nfc" },
+        { title: "Rellify REX", category: "content", desc: "Multi-Agent Content Intelligence Platform.", id: "app_rex" },
+        { title: "Suno AI Clipboard", category: "suno", desc: "Spezial-Manager für Prompt/Lyric Snippets.", id: "app_clip" },
+        { title: "Suno AI Optimizer", category: "suno", desc: "All-in-One Community Tool & Optimizer.", id: "app_opt" },
+        { title: "Hard Tekk Studio Tutorial", category: "suno", desc: "Interaktives Learning für 155+ BPM.", id: "app_tut" },
+        { title: "Photo Learning App", category: "content", desc: "3D-Linsen Simulation & Fotografie Basics.", id: "app_photo" },
+        { title: "Brand Portfolio", category: "content", desc: "SiCKaRiM Personal Brand Hub.", id: "app_brand" },
+        { title: "Music Control Center", category: "suno", desc: "Zentrale Steuerung für AI Production.", id: "app_ctrl" },
+        { title: "Lyrics to Video", category: "suno", desc: "Konverter für synchronisierte Custom Fonts.", id: "app_vid" },
+        { title: "V5 Stems/MIDI Mastery", category: "suno", desc: "DAW Integration & Export Workflows.", id: "app_daw" },
+        { title: "Meta-Tag Guide V4.5+", category: "suno", desc: "Professionelle Tag-Struktur Referenz.", id: "app_meta" },
+        { title: "Prompt & Track Studio", category: "suno", desc: "V4.5+ Entwicklungsumgebung.", id: "app_stu" },
+        { title: "Music Memex + Gen", category: "suno", desc: "Library & Generator Web Studio.", id: "app_memex" },
+        { title: "Project Management", category: "suno", desc: "Memex-basierte Verwaltung.", id: "app_pm" },
+        { title: "MCP-Workflow", category: "tech", desc: "Suno AI Model Context Protocol Integration.", id: "app_mcp" },
+        { title: "RaveTekk Workflow", category: "suno", desc: "Manager für Hard Tekk Produktionen.", id: "app_rave" }
+    ];
+
+    // --- RENDER ---
+    const grid = document.getElementById('appGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filters = document.querySelectorAll('.filter-btn');
+
+    function render(filter = 'all', query = '') {
+        grid.innerHTML = '';
+        
+        apps.forEach(app => {
+            // Filtering Logic
+            if (filter !== 'all' && app.category !== filter) return;
+            if (query && !app.title.toLowerCase().includes(query.toLowerCase()) && !app.desc.toLowerCase().includes(query.toLowerCase())) return;
+
+            // Check LocalStorage for checked state
+            const isChecked = localStorage.getItem(app.id) === 'true';
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div>
+                    <div class="card-header">
+                        <span class="tag ${app.category}">${app.category}</span>
+                    </div>
+                    <h3>${app.title}</h3>
+                    <p>${app.desc}</p>
+                </div>
+                <div class="actions">
+                    <label class="status-check">
+                        <input type="checkbox" onchange="toggleStatus('${app.id}')" ${isChecked ? 'checked' : ''}>
+                        <div class="checkmark"></div>
+                        <span>Done/Active</span>
+                    </label>
+                    <a href="#" class="launch-btn" onclick="alert('Module: ${app.title}\\nStatus: Placeholder (Link Local Files here)')">OPEN ></a>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // --- LOGIC ---
+    function toggleStatus(id) {
+        const current = localStorage.getItem(id) === 'true';
+        localStorage.setItem(id, !current);
+        // Optional: Re-render to show visual feedback immediately if needed, 
+        // but CSS handles strikethrough.
+        render(getCurrentFilter(), searchInput.value); 
+    }
+
+    function getCurrentFilter() {
+        return document.querySelector('.filter-btn.active').dataset.filter;
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', (e) => {
+        render(getCurrentFilter(), e.target.value);
+    });
+
+    filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filters.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            render(btn.dataset.filter, searchInput.value);
+        });
+    });
+
+    // Clock
+    setInterval(() => {
+        const now = new Date();
+        document.getElementById('clock').innerText = now.toLocaleTimeString('de-DE');
+    }, 1000);
+
+    // Initial Load
+    render();
+
+</script>
+</body>
+</html>
